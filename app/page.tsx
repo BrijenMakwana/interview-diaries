@@ -53,8 +53,6 @@ export default function Home() {
         <InterviewCard />
         <InterviewCard />
         <InterviewCard />
-        <InterviewCard />
-        <InterviewCard />
       </section>
     </main>
   );
