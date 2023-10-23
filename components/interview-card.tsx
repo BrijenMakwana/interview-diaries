@@ -10,7 +10,7 @@ import { title } from "@/components/primitives";
 
 const InterviewCard = () => {
   return (
-    <Card className="max-w-[340px]">
+    <Card className="max-w-[340px]" isPressable>
       <CardHeader className="flex-col items-start gap-2">
         <h4 className="text-xl font-semibold leading-none text-default-600">
           Google

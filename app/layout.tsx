@@ -51,7 +51,7 @@ export default function RootLayout({
                 href="https://github.com/BrijenMakwana"
                 title="brijen makwana github"
               >
-                <span className="text-default-600">created with ❤️ by</span>
+                <span className="text-default-600">created by</span>
                 <p className="text-primary capitalize">brijen makwana</p>
               </Link>
             </footer>

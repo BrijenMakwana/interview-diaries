@@ -6,6 +6,8 @@ import { button as buttonStyles } from "@nextui-org/theme";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import InterviewCard from "@/components/interview-card";
+import CompanyCard from "@/components/company-card";
+import FeaturedDev from "@/components/featured-dev";
 
 export default function Home() {
   return (
@@ -28,23 +30,21 @@ export default function Home() {
         </h2>
       </div>
 
-      <div className="flex gap-3">
-        <Link
-          isExternal
-          as={NextLink}
-          href={siteConfig.links.docs}
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          style={{
-            textTransform: "capitalize",
-          }}
-        >
-          go to interview page
-        </Link>
-      </div>
+      <Link
+        isExternal
+        as={NextLink}
+        href={siteConfig.links.docs}
+        className={buttonStyles({
+          color: "primary",
+          radius: "full",
+          variant: "shadow",
+        })}
+        style={{
+          textTransform: "capitalize",
+        }}
+      >
+        go to interview page
+      </Link>
 
       <section className="flex gap-5 flex-wrap items-center justify-center">
         <InterviewCard />
@@ -53,6 +53,23 @@ export default function Home() {
         <InterviewCard />
         <InterviewCard />
         <InterviewCard />
+      </section>
+
+      <section className="flex gap-5 flex-wrap items-center justify-center">
+        <CompanyCard />
+        <CompanyCard />
+        <CompanyCard />
+        <CompanyCard />
+        <CompanyCard />
+        <CompanyCard />
+      </section>
+
+      <section className="flex gap-5 flex-wrap items-center justify-center">
+        <FeaturedDev />
+        <FeaturedDev />
+        <FeaturedDev />
+        <FeaturedDev />
+        <FeaturedDev />
       </section>
     </main>
   );
