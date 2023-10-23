@@ -8,6 +8,7 @@ import { title, subtitle } from "@/components/primitives";
 import InterviewCard from "@/components/interview-card";
 import CompanyCard from "@/components/company-card";
 import FeaturedDev from "@/components/featured-dev";
+import SiteStat from "@/components/site-stat";
 
 export default function Home() {
   return (
@@ -46,7 +47,7 @@ export default function Home() {
         go to interview page
       </Link>
 
-      <section className="flex gap-5 flex-wrap items-center justify-center">
+      <section className="flex gap-5 flex-wrap items-center justify-evenly">
         <InterviewCard />
         <InterviewCard />
         <InterviewCard />
@@ -55,7 +56,7 @@ export default function Home() {
         <InterviewCard />
       </section>
 
-      <section className="flex gap-5 flex-wrap items-center justify-center">
+      <section className="flex gap-5 flex-wrap items-center justify-evenly">
         <CompanyCard />
         <CompanyCard />
         <CompanyCard />
@@ -64,12 +65,18 @@ export default function Home() {
         <CompanyCard />
       </section>
 
-      <section className="flex gap-5 flex-wrap items-center justify-center">
+      <section className="flex gap-5 flex-wrap items-center justify-evenly">
         <FeaturedDev />
         <FeaturedDev />
         <FeaturedDev />
         <FeaturedDev />
         <FeaturedDev />
+      </section>
+
+      <section className="flex gap-5 flex-wrap items-center justify-evenly">
+        <SiteStat title="interviews" />
+        <SiteStat title="companies" />
+        <SiteStat title="developers" />
       </section>
     </main>
   );
