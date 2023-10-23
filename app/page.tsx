@@ -10,7 +10,7 @@ import CompanyCard from "@/components/company-card";
 import FeaturedDev from "@/components/featured-dev";
 import SiteStat from "@/components/site-stat";
 import SectionHeading from "@/components/section-heading";
-import { Divider } from "@nextui-org/react";
+import CustomDivider from "@/components/custom-divider";
 
 export default function Home() {
   return (
@@ -60,7 +60,7 @@ export default function Home() {
         <InterviewCard />
       </section>
 
-      <Divider className="my-20" />
+      <CustomDivider />
 
       <SectionHeading text="top" highlightedText="companies" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
@@ -72,7 +72,7 @@ export default function Home() {
         <CompanyCard />
       </section>
 
-      <Divider className="my-20" />
+      <CustomDivider />
 
       <SectionHeading text="amazing" highlightedText="developers" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
@@ -83,7 +83,7 @@ export default function Home() {
         <FeaturedDev />
       </section>
 
-      <Divider className="my-20" />
+      <CustomDivider />
 
       <SectionHeading text="you can" highlightedText="trust us!" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
