@@ -16,7 +16,7 @@ const SiteStat: FC<ISiteStat> = (props) => {
         <Image
           alt="Card background"
           className="object-cover rounded-xl"
-          src="https://images.unsplash.com/photo-1586985564150-11ee04838034?auto=format&fit=crop&q=80&w=2029&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="https://images.unsplash.com/photo-1568992688065-536aad8a12f6?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fGNvbXBhbmllc3xlbnwwfHwwfHx8MA%3D%3D"
           width={270}
         />
       </CardBody>

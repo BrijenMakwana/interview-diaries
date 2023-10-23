@@ -19,7 +19,7 @@ const FeaturedDev = () => {
           radius="lg"
           size="sm"
         >
-          Visit
+          Visit Profile
         </Button>
       </CardFooter>
     </Card>

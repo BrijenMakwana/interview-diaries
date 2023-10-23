@@ -10,6 +10,7 @@ import CompanyCard from "@/components/company-card";
 import FeaturedDev from "@/components/featured-dev";
 import SiteStat from "@/components/site-stat";
 import SectionHeading from "@/components/section-heading";
+import { Divider } from "@nextui-org/react";
 
 export default function Home() {
   return (
@@ -50,7 +51,7 @@ export default function Home() {
       </Link>
 
       <SectionHeading text="featured" highlightedText="interviews" />
-      <section className="flex gap-5 flex-wrap items-center justify-evenly">
+      <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
         <InterviewCard />
         <InterviewCard />
         <InterviewCard />
@@ -58,9 +59,11 @@ export default function Home() {
         <InterviewCard />
         <InterviewCard />
       </section>
+
+      <Divider className="my-20" />
 
       <SectionHeading text="top" highlightedText="companies" />
-      <section className="flex gap-5 flex-wrap items-center justify-evenly">
+      <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
         <CompanyCard />
         <CompanyCard />
         <CompanyCard />
@@ -68,9 +71,11 @@ export default function Home() {
         <CompanyCard />
         <CompanyCard />
       </section>
+
+      <Divider className="my-20" />
 
       <SectionHeading text="amazing" highlightedText="developers" />
-      <section className="flex gap-5 flex-wrap items-center justify-evenly">
+      <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
         <FeaturedDev />
         <FeaturedDev />
         <FeaturedDev />
@@ -78,8 +83,10 @@ export default function Home() {
         <FeaturedDev />
       </section>
 
+      <Divider className="my-20" />
+
       <SectionHeading text="you can" highlightedText="trust us!" />
-      <section className="flex gap-5 flex-wrap items-center justify-evenly">
+      <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
         <SiteStat title="interviews" />
         <SiteStat title="companies" />
         <SiteStat title="developers" />
