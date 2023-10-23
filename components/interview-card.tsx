@@ -10,14 +10,14 @@ import { title } from "@/components/primitives";
 
 const InterviewCard = () => {
   return (
-    <Card className="max-w-[340px]" isPressable>
+    <Card className="max-w-[340px]" isPressable isHoverable>
       <CardHeader className="flex-col items-start gap-2">
         <h4 className="text-xl font-semibold leading-none text-default-600">
           Google
         </h4>
 
         <span
-          className={title({ color: "green" })}
+          className={title({ color: "yellow" })}
           style={{
             fontSize: "0.9rem",
             fontWeight: "bold",
@@ -37,7 +37,7 @@ const InterviewCard = () => {
           me on this coding adventure!
         </p>
 
-        <Chip color="warning" variant="flat">
+        <Chip color="success" variant="faded">
           Intermediate
         </Chip>
       </CardBody>

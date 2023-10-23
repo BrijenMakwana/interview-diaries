@@ -9,6 +9,7 @@ import InterviewCard from "@/components/interview-card";
 import CompanyCard from "@/components/company-card";
 import FeaturedDev from "@/components/featured-dev";
 import SiteStat from "@/components/site-stat";
+import SectionHeading from "@/components/section-heading";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
           className={title({ color: "yellow" })}
           style={{
             textTransform: "capitalize",
+            fontSize: "4rem",
           }}
         >
           interview diaries&nbsp;
@@ -47,6 +49,7 @@ export default function Home() {
         go to interview page
       </Link>
 
+      <SectionHeading text="featured" highlightedText="interviews" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly">
         <InterviewCard />
         <InterviewCard />
@@ -56,6 +59,7 @@ export default function Home() {
         <InterviewCard />
       </section>
 
+      <SectionHeading text="top" highlightedText="companies" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly">
         <CompanyCard />
         <CompanyCard />
@@ -65,6 +69,7 @@ export default function Home() {
         <CompanyCard />
       </section>
 
+      <SectionHeading text="amazing" highlightedText="developers" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly">
         <FeaturedDev />
         <FeaturedDev />
@@ -73,6 +78,7 @@ export default function Home() {
         <FeaturedDev />
       </section>
 
+      <SectionHeading text="you can" highlightedText="trust us!" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly">
         <SiteStat title="interviews" />
         <SiteStat title="companies" />
