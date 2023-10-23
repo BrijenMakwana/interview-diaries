@@ -1,22 +1,25 @@
+"use client";
+
 import {
   Card,
   CardHeader,
   CardBody,
   CardFooter,
   User,
+  Chip,
 } from "@nextui-org/react";
 import { title } from "@/components/primitives";
 
 const InterviewCard = () => {
   return (
-    <Card className="max-w-[340px]">
+    <Card className="max-w-[340px]" isPressable isHoverable>
       <CardHeader className="flex-col items-start gap-2">
         <h4 className="text-xl font-semibold leading-none text-default-600">
           Google
         </h4>
 
         <span
-          className={title({ color: "green" })}
+          className={title({ color: "yellow" })}
           style={{
             fontSize: "0.9rem",
             fontWeight: "bold",
@@ -36,9 +39,9 @@ const InterviewCard = () => {
           me on this coding adventure!
         </p>
 
-        <span className="text-sm capitalize bg-purple-400 text-black w-fit px-2 py-1 rounded-xl font-medium">
+        <Chip color="success" variant="faded">
           Intermediate
-        </span>
+        </Chip>
       </CardBody>
       <CardFooter className="flex-col items-end gap-2">
         <User
@@ -48,7 +51,7 @@ const InterviewCard = () => {
           }}
         />
 
-        <span className="0 text-small capitalize text-white">
+        <span className="text-small capitalize text-default-400">
           published on 12 Nov, 23
         </span>
       </CardFooter>

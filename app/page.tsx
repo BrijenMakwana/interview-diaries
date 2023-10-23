@@ -6,6 +6,11 @@ import { button as buttonStyles } from "@nextui-org/theme";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import InterviewCard from "@/components/interview-card";
+import CompanyCard from "@/components/company-card";
+import FeaturedDev from "@/components/featured-dev";
+import SiteStat from "@/components/site-stat";
+import SectionHeading from "@/components/section-heading";
+import CustomDivider from "@/components/custom-divider";
 
 export default function Home() {
   return (
@@ -15,6 +20,7 @@ export default function Home() {
           className={title({ color: "yellow" })}
           style={{
             textTransform: "capitalize",
+            fontSize: "4rem",
           }}
         >
           interview diaries&nbsp;
@@ -28,33 +34,62 @@ export default function Home() {
         </h2>
       </div>
 
-      <div className="flex gap-3">
-        <Link
-          isExternal
-          as={NextLink}
-          href={siteConfig.links.docs}
-          className={buttonStyles({
-            color: "primary",
-            radius: "full",
-            variant: "shadow",
-          })}
-          style={{
-            textTransform: "capitalize",
-          }}
-        >
-          go to interview page
-        </Link>
-      </div>
+      <Link
+        isExternal
+        as={NextLink}
+        href={siteConfig.links.docs}
+        className={buttonStyles({
+          color: "primary",
+          radius: "full",
+          variant: "shadow",
+        })}
+        style={{
+          textTransform: "capitalize",
+        }}
+      >
+        go to interview page
+      </Link>
 
-      <section className="flex gap-5 flex-wrap items-center justify-center">
+      <SectionHeading text="featured" highlightedText="interviews" />
+      <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
         <InterviewCard />
         <InterviewCard />
         <InterviewCard />
         <InterviewCard />
         <InterviewCard />
         <InterviewCard />
-        <InterviewCard />
-        <InterviewCard />
+      </section>
+
+      <CustomDivider />
+
+      <SectionHeading text="top" highlightedText="companies" />
+      <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
+        <CompanyCard />
+        <CompanyCard />
+        <CompanyCard />
+        <CompanyCard />
+        <CompanyCard />
+        <CompanyCard />
+      </section>
+
+      <CustomDivider />
+
+      <SectionHeading text="amazing" highlightedText="developers" />
+      <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
+        <FeaturedDev />
+        <FeaturedDev />
+        <FeaturedDev />
+        <FeaturedDev />
+        <FeaturedDev />
+      </section>
+
+      <CustomDivider />
+
+      <SectionHeading text="you can" highlightedText="trust us!" />
+      <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
+        <SiteStat title="interviews" />
+        <SiteStat title="companies" />
+        <SiteStat title="developers" />
       </section>
     </main>
   );
