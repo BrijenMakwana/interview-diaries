@@ -22,6 +22,7 @@ import { ThemeSwitch } from "@/components/theme-switch";
 import { GithubIcon, SearchIcon } from "@/components/icons";
 
 import { Logo } from "@/components/icons";
+import { UserButton } from "@clerk/nextjs";
 
 export const Navbar = () => {
   const searchInput = (
@@ -91,6 +92,7 @@ export const Navbar = () => {
           </Button>
         </NavbarItem>
         <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        <UserButton afterSignOutUrl="/" />
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">

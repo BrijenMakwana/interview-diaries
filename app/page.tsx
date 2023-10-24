@@ -1,9 +1,3 @@
-"use client";
-
-import NextLink from "next/link";
-import { Link } from "@nextui-org/link";
-import { button as buttonStyles } from "@nextui-org/theme";
-import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import InterviewCard from "@/components/interview-card";
 import CompanyCard from "@/components/company-card";
@@ -11,6 +5,7 @@ import FeaturedDev from "@/components/featured-dev";
 import SiteStat from "@/components/site-stat";
 import SectionHeading from "@/components/section-heading";
 import CustomDivider from "@/components/custom-divider";
+import CustomSignInButton from "@/components/custom-signIn-button";
 
 export default function Home() {
   return (
@@ -34,21 +29,7 @@ export default function Home() {
         </h2>
       </div>
 
-      <Link
-        isExternal
-        as={NextLink}
-        href={siteConfig.links.docs}
-        className={buttonStyles({
-          color: "primary",
-          radius: "full",
-          variant: "shadow",
-        })}
-        style={{
-          textTransform: "capitalize",
-        }}
-      >
-        go to interview page
-      </Link>
+      <CustomSignInButton />
 
       <SectionHeading text="featured" highlightedText="interviews" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
