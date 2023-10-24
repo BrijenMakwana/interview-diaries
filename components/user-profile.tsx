@@ -1,6 +1,6 @@
 "use client";
 
-import { Image } from "@nextui-org/react";
+import { Image } from "@nextui-org/image";
 import { title } from "@/components/primitives";
 
 const UserProfile = () => {

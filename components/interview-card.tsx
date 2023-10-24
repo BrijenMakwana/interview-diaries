@@ -1,13 +1,8 @@
 "use client";
 
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  User,
-  Chip,
-} from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Chip } from "@nextui-org/chip";
+import { User } from "@nextui-org/user";
 import { title } from "@/components/primitives";
 
 const InterviewCard = () => {

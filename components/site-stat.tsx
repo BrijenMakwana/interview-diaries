@@ -1,4 +1,5 @@
-import { Card, CardBody, Image, CardHeader } from "@nextui-org/react";
+import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { Image } from "@nextui-org/image";
 import { FC } from "react";
 
 interface ISiteStat {
