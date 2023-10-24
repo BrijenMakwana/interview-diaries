@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Input } from "@nextui-org/react";
+import { Input } from "@nextui-org/input";
 
 interface ICustomInput {
   type: "text" | "number";

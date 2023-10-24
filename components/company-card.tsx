@@ -1,11 +1,6 @@
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Divider,
-  Link,
-} from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Link } from "@nextui-org/link";
+import { Divider } from "@nextui-org/divider";
 
 const CompanyCard = () => {
   return (

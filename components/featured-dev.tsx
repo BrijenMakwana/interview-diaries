@@ -1,4 +1,6 @@
-import { Card, CardFooter, Image, Button } from "@nextui-org/react";
+import { Card, CardFooter } from "@nextui-org/card";
+import { Button } from "@nextui-org/button";
+import { Image } from "@nextui-org/image";
 
 const FeaturedDev = () => {
   return (

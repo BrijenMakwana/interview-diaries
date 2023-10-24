@@ -2,15 +2,10 @@
 
 import CustomInput from "@/components/custom-input";
 import { title } from "@/components/primitives";
-import {
-  Card,
-  CardHeader,
-  Divider,
-  CardBody,
-  RadioGroup,
-  Radio,
-  Input,
-} from "@nextui-org/react";
+import { Card, CardHeader, CardBody } from "@nextui-org/card";
+import { Divider } from "@nextui-org/divider";
+import { RadioGroup, Radio } from "@nextui-org/radio";
+import { Input } from "@nextui-org/input";
 
 export default function Write() {
   return (
