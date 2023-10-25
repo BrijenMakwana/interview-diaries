@@ -25,7 +25,8 @@ export default function Write() {
   const [rounds, setRounds] = useState<number>(0);
   const [passed, setPassed] = useState<boolean>(true);
   const [mode, setMode] = useState<string>("off-campus");
-  const [date, setDate] = useState<string>("");
+  const [difficulty, setDifficulty] = useState<string>("intermediate");
+  const [interviewDate, setInterviewDate] = useState<string>("");
   const [overview, setOverview] = useState<string>("");
 
   const addBlogToFirestore = async () => {
@@ -37,15 +38,17 @@ export default function Write() {
       rounds,
       passed,
       mode,
-      date,
+      interviewDate,
       overview,
       content,
+      publishedDate: new Date(),
     };
 
     try {
-      const docRef = await addDoc(collection(db, "interview-experiences"), {
-        interviewExperienceObj,
-      });
+      const docRef = await addDoc(
+        collection(db, "interview-experiences"),
+        interviewExperienceObj
+      );
       console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       console.error("Error adding document: ", e);
@@ -122,13 +125,28 @@ export default function Write() {
             <Radio value="off-campus">Off-Campus</Radio>
           </RadioGroup>
 
+          <RadioGroup
+            label="Diffiiculty"
+            color="primary"
+            defaultValue="intermediate"
+            orientation="horizontal"
+            isRequired
+            onChange={(e) => setDifficulty(e.target.value)}
+            value={difficulty}
+          >
+            <Radio value="beginner">Beginner</Radio>
+            <Radio value="intermediate">Intermediate</Radio>
+            <Radio value="advanced">Advanced</Radio>
+            <Radio value="expert">Expert</Radio>
+          </RadioGroup>
+
           <Input
             type="date"
             label="Date of the Interview"
             labelPlacement="outside-left"
             isRequired
-            onChange={(e) => setDate(e.target.value)}
-            value={date}
+            onChange={(e) => setInterviewDate(e.target.value)}
+            value={interviewDate}
           />
 
           <Textarea
