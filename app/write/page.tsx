@@ -6,9 +6,18 @@ import { Divider } from "@nextui-org/divider";
 import { RadioGroup, Radio } from "@nextui-org/radio";
 import { Input, Textarea } from "@nextui-org/input";
 
+// Require Editor CSS files.
+import "froala-editor/css/froala_style.min.css";
+import "froala-editor/css/froala_editor.pkgd.min.css";
+
+import FroalaEditorComponent from "react-froala-wysiwyg";
+import { useState } from "react";
+import FroalaEditorView from "react-froala-wysiwyg/FroalaEditorView";
+
 export default function Write() {
+  const [content, setContent] = useState("");
   return (
-    <section>
+    <section className="flex flex-row justify-between flex-wrap">
       <Card className="max-w-[400px]">
         <CardHeader>
           <h1
@@ -66,6 +75,15 @@ export default function Write() {
           />
         </CardBody>
       </Card>
+
+      <section className="max-w-[700px]">
+        <FroalaEditorComponent
+          tag="textarea"
+          model={content}
+          onModelChange={(data: any) => setContent(data)}
+        />
+        <FroalaEditorView model={content} />
+      </section>
     </section>
   );
 }
