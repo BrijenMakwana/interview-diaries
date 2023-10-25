@@ -4,13 +4,64 @@ import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Chip } from "@nextui-org/chip";
 import { User } from "@nextui-org/user";
 import { title } from "@/components/primitives";
+import { FC } from "react";
+import moment from "moment";
+import { useRouter } from "next/navigation";
 
-const InterviewCard = () => {
+interface IInterviewCard {
+  id: string;
+  company: string;
+  position: string;
+  difficulty: string;
+  overview: string;
+  publishedDate: Date;
+  isRoute: boolean;
+  isHoverable: boolean;
+  isPressable: boolean;
+}
+
+const InterviewCard: FC<IInterviewCard> = (props) => {
+  const {
+    id,
+    company,
+    position,
+    difficulty,
+    overview,
+    publishedDate,
+    isRoute = true,
+    isHoverable = true,
+    isPressable = true,
+  } = props;
+
+  const { push } = useRouter();
+
+  const getDifficultyChipColour = () => {
+    switch (difficulty) {
+      case "beginner":
+        return "success";
+      case "intermediate":
+        return "primary";
+      case "advanced":
+        return "warning";
+      case "expert":
+        return "danger";
+    }
+  };
+
+  const goToArticle = () => {
+    push(`/blog/${id}`);
+  };
+
   return (
-    <Card className="max-w-[340px]" isPressable isHoverable>
+    <Card
+      className="max-w-[340px]"
+      isPressable={isPressable}
+      isHoverable={isHoverable}
+      onClick={isRoute ? goToArticle : undefined}
+    >
       <CardHeader className="flex-col items-start gap-2">
-        <h4 className="text-xl font-semibold leading-none text-default-600">
-          Google
+        <h4 className="text-xl font-semibold leading-none text-default-600 capitalize">
+          {company}
         </h4>
 
         <span
@@ -21,21 +72,19 @@ const InterviewCard = () => {
             textTransform: "capitalize",
           }}
         >
-          fronted-developer
+          {position}
         </span>
       </CardHeader>
 
       <CardBody className="px-3 py-0 text-small text-default-400 gap-3">
-        <p>
-          Frontend developer and UI/UX enthusiast. Join me on this coding
-          adventure! Frontend developer and UI/UX enthusiast. Join me on this
-          coding adventure!Frontend developer and UI/UX enthusiast. Join me on
-          this coding adventure! Frontend developer and UI/UX enthusiast. Join
-          me on this coding adventure!
-        </p>
+        <p>{overview}</p>
 
-        <Chip color="success" variant="faded">
-          Intermediate
+        <Chip
+          color={getDifficultyChipColour()}
+          variant="faded"
+          className="capitalize"
+        >
+          {difficulty}
         </Chip>
       </CardBody>
       <CardFooter className="flex-col items-end gap-2">
@@ -47,7 +96,7 @@ const InterviewCard = () => {
         />
 
         <span className="text-small capitalize text-default-400">
-          published on 12 Nov, 23
+          {/* published on {moment(publishedDate).format("ll")} */}
         </span>
       </CardFooter>
     </Card>

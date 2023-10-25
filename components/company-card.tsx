@@ -12,7 +12,7 @@ const CompanyCard = () => {
       <CardBody>
         <p>
           Microsoft Corporation is an American multinational technology
-          corporation headquartered in Redmond, Washington. Microsoft's
+          corporation headquartered in Redmond, Washington. Microsofts
           best-known software products are the Windows line of operating
           systems, the Microsoft 365 suite of productivity applications, and the
           Edge web browser.
