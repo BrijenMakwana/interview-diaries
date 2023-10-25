@@ -12,7 +12,6 @@ import "froala-editor/css/froala_editor.pkgd.min.css";
 
 import FroalaEditorComponent from "react-froala-wysiwyg";
 import { useState } from "react";
-import FroalaEditorView from "react-froala-wysiwyg/FroalaEditorView";
 
 import { db, addDoc, collection } from "@/firebase/firebase";
 
@@ -23,7 +22,7 @@ export default function Write() {
   const [company, setCompany] = useState<string>("");
   const [position, setPosition] = useState<string>("");
   const [rounds, setRounds] = useState<number>(0);
-  const [passed, setPassed] = useState<boolean>(true);
+  const [selected, setSelected] = useState<boolean>(true);
   const [mode, setMode] = useState<string>("off-campus");
   const [difficulty, setDifficulty] = useState<string>("intermediate");
   const [interviewDate, setInterviewDate] = useState<string>("");
@@ -36,7 +35,7 @@ export default function Write() {
       company,
       position,
       rounds,
-      passed,
+      selected,
       mode,
       interviewDate,
       overview,
@@ -100,13 +99,13 @@ export default function Write() {
           />
 
           <RadioGroup
-            label="Passed the Interview?"
+            label="Selected?"
             color="primary"
             defaultValue="yes"
             orientation="horizontal"
             isRequired
-            onChange={(e) => setPassed(e.target.value === "yes")}
-            value={passed ? "yes" : "no"}
+            onChange={(e) => setSelected(e.target.value === "yes")}
+            value={selected ? "yes" : "no"}
           >
             <Radio value="yes">Yes</Radio>
             <Radio value="no">No</Radio>
@@ -178,7 +177,6 @@ export default function Write() {
           model={content}
           onModelChange={(data: any) => setContent(data)}
         />
-        {/* <FroalaEditorView model={content} /> */}
       </section>
     </section>
   );

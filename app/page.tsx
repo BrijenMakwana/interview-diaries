@@ -1,5 +1,5 @@
 import { title, subtitle } from "@/components/primitives";
-import InterviewCard from "@/components/interview-card";
+// import InterviewCard from "@/components/interview-card";
 import CompanyCard from "@/components/company-card";
 import FeaturedDev from "@/components/featured-dev";
 import SiteStat from "@/components/site-stat";
@@ -33,12 +33,12 @@ export default function Home() {
 
       <SectionHeading text="featured" highlightedText="interviews" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
+        {/* <InterviewCard />
         <InterviewCard />
         <InterviewCard />
         <InterviewCard />
         <InterviewCard />
-        <InterviewCard />
-        <InterviewCard />
+        <InterviewCard /> */}
       </section>
 
       <CustomDivider />
