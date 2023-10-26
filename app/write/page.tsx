@@ -12,6 +12,7 @@ import { useState } from "react";
 
 import { db, addDoc, collection } from "@/firebase/firebase";
 import CustomMarkdown from "@/components/custom-markdown";
+import { Link } from "@nextui-org/link";
 
 export default function Write() {
   const [content, setContent] = useState<string>("");
@@ -39,7 +40,7 @@ export default function Write() {
       interviewDate,
       overview,
       content,
-      publishedDate: new Date(),
+      publishedDate: new Date().toISOString(),
     };
 
     try {
@@ -76,7 +77,7 @@ export default function Write() {
           <Input
             type="text"
             label="Company"
-            placeholder="Company you interviiewed for"
+            placeholder="Company you interviewed for"
             isRequired
             onChange={(e) => setCompany(e.target.value)}
             value={company}
@@ -172,7 +173,7 @@ export default function Write() {
 
       <section className="max-w-[700px] w-full">
         <Tabs aria-label="Options" color="warning">
-          <Tab key="code" title="Code">
+          <Tab key="markdown" title="Markdown">
             <Textarea
               label="Interview Experience"
               placeholder="Start typeing..."
@@ -186,6 +187,14 @@ export default function Write() {
             <CustomMarkdown content={content} />
           </Tab>
         </Tabs>
+
+        <Link
+          isExternal
+          showAnchorIcon
+          href="https://www.markdownguide.org/cheat-sheet/"
+        >
+          Markdown Cheetsheet
+        </Link>
       </section>
     </section>
   );

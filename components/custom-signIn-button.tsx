@@ -4,9 +4,7 @@ import { Button } from "@nextui-org/button";
 const CustomSignInButton = () => {
   return (
     <SignInButton mode="modal">
-      <Button color="primary">
-        Sign In / Sign Up to write your interview experience
-      </Button>
+      <Button color="primary">Login</Button>
     </SignInButton>
   );
 };
