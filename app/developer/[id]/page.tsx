@@ -12,9 +12,6 @@ export default function DocsPage({
 }) {
   return (
     <main className="flex flex-col items-center justify-center">
-      <UserProfile />
-
-      <CustomDivider />
       <SectionHeading text="all" highlightedText="interviews" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly mt-10"></section>
     </main>
