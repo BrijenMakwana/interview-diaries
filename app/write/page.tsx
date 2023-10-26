@@ -6,17 +6,15 @@ import { Divider } from "@nextui-org/divider";
 import { RadioGroup, Radio } from "@nextui-org/radio";
 import { Input, Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
+import { Tabs, Tab } from "@nextui-org/tabs";
 
-import "froala-editor/css/froala_style.min.css";
-import "froala-editor/css/froala_editor.pkgd.min.css";
-
-import FroalaEditorComponent from "react-froala-wysiwyg";
 import { useState } from "react";
 
 import { db, addDoc, collection } from "@/firebase/firebase";
+import CustomMarkdown from "@/components/custom-markdown";
 
 export default function Write() {
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [company, setCompany] = useState<string>("");
@@ -35,6 +33,7 @@ export default function Write() {
       company,
       position,
       rounds,
+      difficulty,
       selected,
       mode,
       interviewDate,
@@ -171,12 +170,22 @@ export default function Write() {
         </CardFooter>
       </Card>
 
-      <section className="max-w-[700px]">
-        <FroalaEditorComponent
-          tag="textarea"
-          model={content}
-          onModelChange={(data: any) => setContent(data)}
-        />
+      <section className="max-w-[700px] w-full">
+        <Tabs aria-label="Options" color="warning">
+          <Tab key="code" title="Code">
+            <Textarea
+              label="Interview Experience"
+              placeholder="Start typeing..."
+              onChange={(e) => setContent(e.target.value)}
+              value={content}
+              fullWidth
+              minRows={100}
+            />
+          </Tab>
+          <Tab key="preview" title="Preview">
+            <CustomMarkdown content={content} />
+          </Tab>
+        </Tabs>
       </section>
     </section>
   );

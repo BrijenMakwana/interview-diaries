@@ -4,9 +4,9 @@ import InterviewCard from "@/components/interview-card";
 import SectionHeading from "@/components/section-heading";
 import { db, getDoc, doc } from "@/firebase/firebase";
 import { useEffect, useState } from "react";
-import FroalaEditorView from "react-froala-wysiwyg/FroalaEditorView";
 import { Chip } from "@nextui-org/chip";
 import moment from "moment";
+import CustomMarkdown from "@/components/custom-markdown";
 
 export default function ArticlePage({ params }: { params: { id: string } }) {
   const [article, setArticle] = useState<any>("");
@@ -42,7 +42,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
           isPressable={false}
         />
 
-        <article className="bg-gray-300 p-5 rounded-lg max-w-screen-md">
+        <article className="p-5 rounded-lg w-[700px]">
           <section className="flex flex-row gap-2 items-center flex-wrap mb-3">
             <Chip color="primary" variant="flat" className="capitalize">
               {article.selected ? "selected" : "not-selected"}
@@ -55,7 +55,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
             </Chip>
           </section>
 
-          <FroalaEditorView model={article.content} />
+          <CustomMarkdown content={article.content} />
         </article>
       </section>
     </section>
