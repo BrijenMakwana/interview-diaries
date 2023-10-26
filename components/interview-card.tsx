@@ -1,12 +1,13 @@
 "use client";
 
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import { Chip } from "@nextui-org/chip";
 import { User } from "@nextui-org/user";
-import { title } from "@/components/primitives";
 import { FC } from "react";
 import moment from "moment";
 import { useRouter } from "next/navigation";
+import DeveloperPosition from "./developer-position";
+import InterviewDifficulty from "./interview-difficulty";
+import CompanyName from "./company-name";
 
 interface IInterviewCard {
   id: string;
@@ -35,19 +36,6 @@ const InterviewCard: FC<IInterviewCard> = (props) => {
 
   const { push } = useRouter();
 
-  const getDifficultyChipColour = () => {
-    switch (difficulty) {
-      case "beginner":
-        return "success";
-      case "intermediate":
-        return "primary";
-      case "advanced":
-        return "warning";
-      case "expert":
-        return "danger";
-    }
-  };
-
   const goToArticle = () => {
     push(`/blog/${id}`);
   };
@@ -60,32 +48,15 @@ const InterviewCard: FC<IInterviewCard> = (props) => {
       onClick={isRoute ? goToArticle : undefined}
     >
       <CardHeader className="flex-col items-start gap-2">
-        <h4 className="text-xl font-semibold leading-none text-default-600 capitalize">
-          {company}
-        </h4>
+        <CompanyName company={company} />
 
-        <span
-          className={title({ color: "yellow" })}
-          style={{
-            fontSize: "0.9rem",
-            fontWeight: "bold",
-            textTransform: "capitalize",
-          }}
-        >
-          {position}
-        </span>
+        <DeveloperPosition position={position} />
       </CardHeader>
 
       <CardBody className="px-3 py-0 text-small text-default-400 gap-3">
         <p>{overview}</p>
 
-        <Chip
-          color={getDifficultyChipColour()}
-          variant="faded"
-          className="capitalize"
-        >
-          {difficulty}
-        </Chip>
+        <InterviewDifficulty difficulty={difficulty} />
       </CardBody>
       <CardFooter className="flex-col items-end gap-2">
         <User

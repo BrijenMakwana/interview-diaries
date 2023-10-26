@@ -1,11 +1,26 @@
 "use client";
 
 import InterviewCard from "@/components/interview-card";
+import SearchBar from "@/components/search-bar";
 import { db, collection, getDocs } from "@/firebase/firebase";
 import { useEffect, useState } from "react";
+import { Tabs, Tab } from "@nextui-org/tabs";
+import {
+  Table,
+  TableHeader,
+  TableBody,
+  TableColumn,
+  TableRow,
+  TableCell,
+} from "@nextui-org/table";
+import { useRouter } from "next/navigation";
 
 export default function BlogPage() {
-  const [articles, setArticles] = useState<any>([]);
+  const [articles, setArticles] = useState<any[]>([]);
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredBlogs, setFilteredBlogs] = useState<any[]>([]);
+
+  const { push } = useRouter();
 
   const getAllArticles = async () => {
     const articlesArray: any[] = [];
@@ -21,18 +36,84 @@ export default function BlogPage() {
 
     setArticles(articlesArray);
 
-    console.log(articlesArray);
+    setFilteredBlogs(articlesArray);
+  };
+
+  const filterBlogs = () => {
+    const filtered = articles.filter((article: any) =>
+      article.company.toLowerCase().includes(searchInput.toLowerCase())
+    );
+
+    setFilteredBlogs(filtered);
   };
 
   useEffect(() => {
     getAllArticles();
   }, []);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      filterBlogs();
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [searchInput]);
+
+  const renderedArray = searchInput ? filteredBlogs : articles;
+
   return (
-    <section className="flex gap-5 flex-wrap items-center justify-center w-full">
-      {articles.map((item: any) => (
-        <InterviewCard key={item.id} {...item} />
-      ))}
-    </section>
+    <main>
+      <SearchBar setValue={setSearchInput} value={searchInput} />
+
+      <div className="w-full flex flex-col items-center mt-12">
+        <Tabs aria-label="Options" color="warning">
+          <Tab key="card" title="Card View">
+            <section className="flex gap-5 flex-wrap items-center justify-center w-full mt-6">
+              {searchInput
+                ? filteredBlogs.map((item: any) => (
+                    <InterviewCard key={item.id} {...item} />
+                  ))
+                : articles.map((item: any) => (
+                    <InterviewCard key={item.id} {...item} />
+                  ))}
+            </section>
+          </Tab>
+          <Tab key="table" title="Table View">
+            <section className="w-full mt-6">
+              <Table aria-label="interview experiences">
+                <TableHeader>
+                  <TableColumn>COMPANY</TableColumn>
+                  <TableColumn>POSITION</TableColumn>
+                  <TableColumn>OVERVIEW</TableColumn>
+                  <TableColumn>DIFFICULTY</TableColumn>
+                </TableHeader>
+                <TableBody>
+                  {renderedArray.map((item: any, index: number) => (
+                    <TableRow
+                      key={index + 1}
+                      onClick={() => push(`/blog/${item.id}`)}
+                      className="cursor-pointer hover:bg-gray-700 "
+                    >
+                      <TableCell className="font-bold capitalize">
+                        {item.company}
+                      </TableCell>
+                      <TableCell className="text-amber-600 font-bold capitalize">
+                        {item.position}
+                      </TableCell>
+                      <TableCell>
+                        <p>{item.overview}</p>
+                      </TableCell>
+                      <TableCell className="capitalize text-pink-300	font-semibold">
+                        {item.difficulty}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </section>
+          </Tab>
+        </Tabs>
+      </div>
+    </main>
   );
 }
