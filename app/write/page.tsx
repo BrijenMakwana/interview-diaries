@@ -24,7 +24,7 @@ export default function Write() {
   const [selected, setSelected] = useState<boolean>(true);
   const [mode, setMode] = useState<string>("off-campus");
   const [difficulty, setDifficulty] = useState<string>("intermediate");
-  const [interviewDate, setInterviewDate] = useState<string>("");
+  const [interviewDate, setInterviewDate] = useState<string>("2023-08-09");
   const [overview, setOverview] = useState<string>("");
 
   const addBlogToFirestore = async () => {
