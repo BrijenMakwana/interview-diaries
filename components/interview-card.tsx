@@ -1,7 +1,6 @@
 "use client";
 
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
-import { User } from "@nextui-org/user";
 import { FC } from "react";
 import moment from "moment";
 import { useRouter } from "next/navigation";
@@ -15,7 +14,8 @@ interface IInterviewCard {
   position: string;
   difficulty: string;
   overview: string;
-  publishedDate: Date;
+  publishedDate: string;
+  author: string;
   isRoute: boolean;
   isHoverable: boolean;
   isPressable: boolean;
@@ -29,6 +29,7 @@ const InterviewCard: FC<IInterviewCard> = (props) => {
     difficulty,
     overview,
     publishedDate,
+    author,
     isRoute = true,
     isHoverable = true,
     isPressable = true,
@@ -59,15 +60,9 @@ const InterviewCard: FC<IInterviewCard> = (props) => {
         <InterviewDifficulty difficulty={difficulty} />
       </CardBody>
       <CardFooter className="flex-col items-end gap-2">
-        <User
-          name="Brijen Makwana"
-          avatarProps={{
-            src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-          }}
-        />
-
+        <span className="self-end text-sm">@{author}</span>
         <span className="text-small capitalize text-default-400">
-          {/* published on {moment(publishedDate).format("ll")} */}
+          published on {moment(publishedDate).format("ll")}
         </span>
       </CardFooter>
     </Card>

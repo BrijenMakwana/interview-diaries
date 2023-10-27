@@ -16,6 +16,7 @@ import { Link } from "@nextui-org/link";
 
 import confetti from "canvas-confetti";
 import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 
 export default function Write() {
   const [content, setContent] = useState<string>("");
@@ -29,6 +30,8 @@ export default function Write() {
   const [difficulty, setDifficulty] = useState<string>("intermediate");
   const [interviewDate, setInterviewDate] = useState<string>("2023-08-09");
   const [overview, setOverview] = useState<string>("");
+
+  const { isSignedIn, user, isLoaded } = useUser();
 
   const { push } = useRouter();
 
@@ -46,6 +49,8 @@ export default function Write() {
       overview,
       content,
       publishedDate: new Date().toISOString(),
+      author: user?.fullName,
+      email: user?.emailAddresses[0].emailAddress,
     };
 
     try {

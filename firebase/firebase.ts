@@ -8,6 +8,8 @@ import {
   doc,
   arrayUnion,
   updateDoc,
+  query,
+  where,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -23,4 +25,15 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
-export { db, collection, addDoc, getDocs, getDoc, doc, arrayUnion, updateDoc };
+export {
+  db,
+  collection,
+  addDoc,
+  getDocs,
+  getDoc,
+  doc,
+  arrayUnion,
+  updateDoc,
+  query,
+  where,
+};
