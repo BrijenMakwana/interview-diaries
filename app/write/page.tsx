@@ -14,6 +14,9 @@ import { db, addDoc, collection } from "@/firebase/firebase";
 import CustomMarkdown from "@/components/custom-markdown";
 import { Link } from "@nextui-org/link";
 
+import confetti from "canvas-confetti";
+import { useRouter } from "next/navigation";
+
 export default function Write() {
   const [content, setContent] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -26,6 +29,8 @@ export default function Write() {
   const [difficulty, setDifficulty] = useState<string>("intermediate");
   const [interviewDate, setInterviewDate] = useState<string>("2023-08-09");
   const [overview, setOverview] = useState<string>("");
+
+  const { push } = useRouter();
 
   const addBlogToFirestore = async () => {
     setIsLoading(true);
@@ -48,7 +53,10 @@ export default function Write() {
         collection(db, "interview-experiences"),
         interviewExperienceObj
       );
-      console.log("Document written with ID: ", docRef.id);
+
+      confetti();
+
+      push(`/blog/${docRef.id}`);
     } catch (e) {
       console.error("Error adding document: ", e);
     } finally {
