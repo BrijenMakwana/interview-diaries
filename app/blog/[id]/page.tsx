@@ -13,6 +13,8 @@ import { useUser } from "@clerk/nextjs";
 import UserComment, { IUserComment } from "@/components/user-comment";
 import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
+import Newsletter from "@/components/newsletter";
+import CustomDivider from "@/components/custom-divider";
 
 export default function ArticlePage({ params }: { params: { id: string } }) {
   const [article, setArticle] = useState<any>("");
@@ -74,20 +76,13 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
   }, []);
 
   return (
-    <section className="flex flex-col items-center justify-center w-full">
+    <main className="flex flex-col items-center justify-center w-full">
       <SectionHeading
         text="interview experience for"
         highlightedText={article.company}
       />
 
-      <section className="flex flex-row gap-3 items-start justify-center flex-wrap mt-10">
-        <InterviewCard
-          {...article}
-          isRoute={false}
-          isHoverable={false}
-          isPressable={false}
-        />
-
+      <section className="flex flex-row gap-10 items-start justify-center flex-wrap mt-10 w-full">
         <article className="max-w-[700px] flex-1 p-5 border-solid border-1 border-zinc-700 rounded-xl">
           <section className="flex flex-row gap-2 items-center flex-wrap mb-3">
             <Chip color="primary" variant="flat" className="capitalize">
@@ -104,39 +99,52 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
           <CustomMarkdown content={article.content} />
         </article>
 
-        <section>
-          <div className="flex flex-row items-center justify-between gap-3">
-            <Input
-              type="text"
-              label="Your Comment"
-              placeholder={
-                isSignedIn ? "Want to say anything?" : "Login to comment"
-              }
-              onChange={(e) => setComment(e.target.value)}
-              value={comment}
-              maxLength={150}
-              className="flex-1"
-              disabled={!isSignedIn}
-            />
+        <div>
+          <InterviewCard
+            {...article}
+            isRoute={false}
+            isHoverable={false}
+            isPressable={false}
+          />
 
-            <Button
-              color="primary"
-              isLoading={isCommenting}
-              onClick={addCommentToBlog}
-              isDisabled={!isSignedIn || !comment}
-              className="w-[140px]"
-            >
-              Add Comment
-            </Button>
-          </div>
+          <section className="mt-10">
+            <div className="flex flex-row items-center justify-between gap-3">
+              <Input
+                type="text"
+                label="Your Comment"
+                placeholder={
+                  isSignedIn ? "Want to say anything?" : "Login to comment"
+                }
+                onChange={(e) => setComment(e.target.value)}
+                value={comment}
+                maxLength={150}
+                className="flex-1"
+                disabled={!isSignedIn}
+              />
 
-          <section className="mt-5">
-            {comments?.map((item: IUserComment) => (
-              <UserComment {...item} key={item.id} />
-            ))}
+              <Button
+                color="primary"
+                isLoading={isCommenting}
+                onClick={addCommentToBlog}
+                isDisabled={!isSignedIn || !comment}
+                className="w-[140px]"
+              >
+                Add Comment
+              </Button>
+            </div>
+
+            <section className="mt-5">
+              {comments?.map((item: IUserComment) => (
+                <UserComment {...item} key={item.id} />
+              ))}
+            </section>
           </section>
-        </section>
+        </div>
       </section>
-    </section>
+
+      <CustomDivider />
+
+      <Newsletter />
+    </main>
   );
 }

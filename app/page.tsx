@@ -1,6 +1,4 @@
 import { title, subtitle } from "@/components/primitives";
-import CompanyCard from "@/components/company-card";
-import FeaturedDev from "@/components/featured-dev";
 import SiteStat from "@/components/site-stat";
 import SectionHeading from "@/components/section-heading";
 import CustomDivider from "@/components/custom-divider";
