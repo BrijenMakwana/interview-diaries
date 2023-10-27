@@ -23,7 +23,7 @@ export default function Write() {
 
   const [company, setCompany] = useState<string>("");
   const [position, setPosition] = useState<string>("");
-  const [rounds, setRounds] = useState<number>(0);
+  const [rounds, setRounds] = useState<number>(1);
   const [selected, setSelected] = useState<boolean>(true);
   const [mode, setMode] = useState<string>("off-campus");
   const [difficulty, setDifficulty] = useState<string>("intermediate");
