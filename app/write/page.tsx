@@ -61,21 +61,6 @@ export default function Write() {
         interviewExperienceObj
       );
 
-      confetti({
-        particleCount: 100,
-        startVelocity: 30,
-        spread: 360,
-        origin: {
-          x: Math.random(),
-          y: Math.random() - 0.2,
-        },
-      });
-
-      push(`/blog/${docRef.id}`);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    } finally {
-      setIsLoading(false);
       toast.success("Post created!", {
         position: "top-center",
         autoClose: 3000,
@@ -86,6 +71,18 @@ export default function Write() {
         progress: undefined,
         theme: "dark",
       });
+
+      confetti({
+        particleCount: 100,
+        startVelocity: 30,
+        spread: 360,
+      });
+
+      push(`/blog/${docRef.id}`);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -218,28 +215,25 @@ export default function Write() {
 
       <section className="max-w-[700px] w-full">
         <Tabs aria-label="Options" color="warning">
-          <Tab key="markdown" title="Markdown">
-            <Textarea
-              label="Interview Experience"
+          <Tab key="markdown" title="Markdown" className="h-full">
+            {/* <Link
+              isExternal
+              showAnchorIcon
+              href="https://www.markdownguide.org/cheat-sheet/"
+            >
+              Markdown Cheetsheet
+            </Link> */}
+            <textarea
               placeholder="Start typeing..."
               onChange={(e) => setContent(e.target.value)}
               value={content}
-              fullWidth
-              minRows={100}
+              className="w-full h-full p-4 rounded-xl resize-none outline-none"
             />
           </Tab>
           <Tab key="preview" title="Preview">
             <CustomMarkdown content={content} />
           </Tab>
         </Tabs>
-
-        <Link
-          isExternal
-          showAnchorIcon
-          href="https://www.markdownguide.org/cheat-sheet/"
-        >
-          Markdown Cheetsheet
-        </Link>
       </section>
     </section>
   );
