@@ -1,5 +1,4 @@
 import { title, subtitle } from "@/components/primitives";
-// import InterviewCard from "@/components/interview-card";
 import CompanyCard from "@/components/company-card";
 import FeaturedDev from "@/components/featured-dev";
 import SiteStat from "@/components/site-stat";
@@ -9,10 +8,11 @@ import NextLink from "next/link";
 import { Button } from "@nextui-org/button";
 import Newsletter from "@/components/newsletter";
 import Image from "next/image";
+import FeaturedInterviews from "@/components/featured-interviews";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center gap-10 py-8 md:py-10">
+    <main className="flex flex-col items-center justify-center gap-20 py-8 md:py-10">
       <section className="flex flex-row items-center justify-evenly w-full flex-wrap gap-10">
         <Image src="/interview.svg" height={300} width={300} alt="interview" />
 
@@ -42,15 +42,7 @@ export default function Home() {
 
       <CustomDivider />
 
-      <SectionHeading text="featured" highlightedText="interviews" />
-      <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
-        {/* <InterviewCard />
-        <InterviewCard />
-        <InterviewCard />
-        <InterviewCard />
-        <InterviewCard />
-        <InterviewCard /> */}
-      </section>
+      <FeaturedInterviews />
 
       <CustomDivider />
 

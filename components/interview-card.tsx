@@ -43,7 +43,7 @@ const InterviewCard: FC<IInterviewCard> = (props) => {
 
   return (
     <Card
-      className="max-w-[340px] min-w-[300px]"
+      className="max-w-[400px] w-[350px]"
       isPressable={isPressable}
       isHoverable={isHoverable}
       onClick={isRoute ? goToArticle : undefined}
