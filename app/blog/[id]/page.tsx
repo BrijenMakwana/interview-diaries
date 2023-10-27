@@ -85,13 +85,13 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
       <section className="flex flex-row gap-10 items-start justify-center flex-wrap mt-10 w-full">
         <article className="max-w-[700px] flex-1 p-5 border-solid border-1 border-zinc-700 rounded-xl">
           <section className="flex flex-row gap-2 items-center flex-wrap mb-3">
-            <Chip color="primary" variant="flat" className="capitalize">
+            <Chip color="primary" variant="dot" className="capitalize">
               {article.selected ? "selected" : "not-selected"}
             </Chip>
-            <Chip color="primary" variant="flat" className="capitalize">
+            <Chip color="primary" variant="dot" className="capitalize">
               {article.mode}
             </Chip>
-            <Chip color="primary" variant="flat" className="capitalize">
+            <Chip color="primary" variant="dot" className="capitalize">
               interviewed on {moment(article.interviewDate).format("ll")}
             </Chip>
           </section>
@@ -111,7 +111,6 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
             <div className="flex flex-row items-center justify-between gap-3">
               <Input
                 type="text"
-                label="Your Comment"
                 placeholder={
                   isSignedIn ? "Want to say anything?" : "Login to comment"
                 }
