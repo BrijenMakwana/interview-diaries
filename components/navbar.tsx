@@ -17,13 +17,13 @@ import NextLink from "next/link";
 import clsx from "clsx";
 
 import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon, SearchIcon } from "@/components/icons";
+import { GithubIcon } from "@/components/icons";
 
-import { Logo } from "@/components/icons";
 import { UserButton } from "@clerk/nextjs";
 
 import { currentUser } from "@clerk/nextjs";
 import CustomSignInButton from "./custom-signIn-button";
+import Image from "next/image";
 
 export async function Navbar() {
   const user = await currentUser();
@@ -32,9 +32,8 @@ export async function Navbar() {
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">ACME</p>
+          <NextLink href="/">
+            <Image src="/logo.png" height={85} width={85} alt="logo" />
           </NextLink>
         </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
