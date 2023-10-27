@@ -10,6 +10,7 @@ import Newsletter from "@/components/newsletter";
 import Image from "next/image";
 import FeaturedInterviews from "@/components/featured-interviews";
 import MeetCreator from "@/components/meet-creator";
+import TopCompanies from "@/components/top-companies";
 
 export default function Home() {
   return (
@@ -47,15 +48,7 @@ export default function Home() {
 
       <CustomDivider />
 
-      <SectionHeading text="top" highlightedText="companies" />
-      <section className="flex gap-5 flex-wrap items-center justify-center w-full">
-        <CompanyCard />
-        <CompanyCard />
-        <CompanyCard />
-        <CompanyCard />
-        <CompanyCard />
-        <CompanyCard />
-      </section>
+      <TopCompanies />
 
       <CustomDivider />
 

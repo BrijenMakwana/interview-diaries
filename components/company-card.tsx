@@ -1,30 +1,30 @@
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Link } from "@nextui-org/link";
 import { Divider } from "@nextui-org/divider";
+import { FC } from "react";
 
-const CompanyCard = () => {
+interface ICompanyCard {
+  id: number;
+  name: string;
+  description: string;
+  website: string;
+}
+
+const CompanyCard: FC<ICompanyCard> = (props) => {
+  const { id, name, description, website } = props;
+
   return (
     <Card className="max-w-[340px]">
       <CardHeader>
-        <p className="text-xl">Microsoft</p>
+        <p className="text-xl capitalize">{name}</p>
       </CardHeader>
       <Divider />
       <CardBody>
-        <p>
-          Microsoft Corporation is an American multinational technology
-          corporation headquartered in Redmond, Washington. Microsofts
-          best-known software products are the Windows line of operating
-          systems, the Microsoft 365 suite of productivity applications, and the
-          Edge web browser.
-        </p>
+        <p>{description}</p>
       </CardBody>
       <Divider />
       <CardFooter>
-        <Link
-          isExternal
-          showAnchorIcon
-          href="https://github.com/nextui-org/nextui"
-        >
+        <Link isExternal showAnchorIcon href={website}>
           Visit Company Site.
         </Link>
       </CardFooter>

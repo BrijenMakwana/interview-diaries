@@ -13,9 +13,10 @@ const MeetCreator = () => {
         <div className="inline-block max-w-lg text-center justify-center">
           <p>
             I'm a Full-Time Mobile & Web Developer with expertise in
-            React-Native, React, Typescript, and JavaScript. I'm also a YouTube
-            Creator with 1.7M+ subscribers, a GeeksForGeeks Mentor, and a Book
-            Author. Let's explore technology together! 🕸️💡📚
+            React-Native, React, Typescript, and JavaScript. I'm also a
+            contributor on YouTube channel called Programmingknowledge with
+            1.7M+ subscribers, a GeeksForGeeks Mentor, and a Book Author. Let's
+            explore technology together! 🕸️💡📚
           </p>
 
           <p className="mt-5">
