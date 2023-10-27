@@ -68,7 +68,7 @@ export default function BlogPage() {
       <div className="w-full flex flex-col items-center mt-12">
         <Tabs aria-label="Options" color="warning">
           <Tab key="card" title="Card View">
-            <section className="flex gap-5 flex-wrap items-center justify-center w-full mt-6">
+            <section className="flex gap-5 flex-wrap justify-center w-full mt-6">
               {searchInput
                 ? filteredBlogs.map((item: any) => (
                     <InterviewCard key={item.id} {...item} />

@@ -55,7 +55,7 @@ const InterviewCard: FC<IInterviewCard> = (props) => {
       </CardHeader>
 
       <CardBody className="px-3 py-0 text-small text-default-400 gap-3">
-        <p>{overview}</p>
+        <p className="flex-1">{overview}</p>
 
         <InterviewDifficulty difficulty={difficulty} />
       </CardBody>
