@@ -2,9 +2,10 @@ import { Card, CardBody } from "@nextui-org/card";
 import moment from "moment";
 import { FC } from "react";
 
-interface IUserComment {
+export interface IUserComment {
+  id: string;
   comment: string;
-  author: string;
+  author: string | null | undefined;
   date: string;
 }
 
@@ -12,7 +13,7 @@ const UserComment: FC<IUserComment> = (props) => {
   const { comment, author, date } = props;
 
   return (
-    <Card>
+    <Card className="mt-3">
       <CardBody>
         <p>{comment}</p>
 

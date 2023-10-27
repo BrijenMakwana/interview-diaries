@@ -11,12 +11,14 @@ import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { useUser } from "@clerk/nextjs";
 import CustomSignInButton from "@/components/custom-signIn-button";
-import UserComment from "@/components/user-comment";
+import UserComment, { IUserComment } from "@/components/user-comment";
+import { nanoid } from "nanoid";
 
 export default function ArticlePage({ params }: { params: { id: string } }) {
   const [article, setArticle] = useState<any>("");
   const [comment, setComment] = useState<string>("");
   const [isCommenting, setIsCommenting] = useState<boolean>(false);
+  const [comments, setComments] = useState<IUserComment[]>([]);
   const { isSignedIn, user, isLoaded } = useUser();
 
   const getArticle = async () => {
@@ -26,6 +28,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
     if (docSnap.exists()) {
       console.log(docSnap.data());
       setArticle(docSnap.data());
+      setComments(docSnap.data().comments);
     } else {
       console.log("No such document!");
     }
@@ -36,8 +39,9 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
     const docRef = doc(db, "interview-experiences", params.id);
 
     const commentObj = {
+      id: nanoid(),
       comment: comment,
-      author: user?.fullName,
+      author: user?.fullName || "NA",
       date: new Date().toISOString(),
     };
 
@@ -45,6 +49,9 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
       await updateDoc(docRef, {
         comments: arrayUnion(commentObj),
       });
+
+      setComments([...comments, commentObj]);
+      setComment("");
     } catch (e) {
     } finally {
       setIsCommenting(false);
@@ -114,8 +121,8 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
             </div>
 
             <section className="mt-5">
-              {article.comments?.map((item: any, index: number) => (
-                <UserComment {...item} key={index} />
+              {comments?.map((item: IUserComment) => (
+                <UserComment {...item} key={item.id} />
               ))}
             </section>
           </section>
