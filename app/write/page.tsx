@@ -52,6 +52,7 @@ export default function Write() {
       publishedDate: new Date().toISOString(),
       author: user?.fullName,
       email: user?.emailAddresses[0].emailAddress,
+      comments: [],
     };
 
     try {
@@ -70,7 +71,7 @@ export default function Write() {
         },
       });
 
-      push("/blog");
+      push(`/blog/${docRef.id}`);
     } catch (e) {
       console.error("Error adding document: ", e);
     } finally {

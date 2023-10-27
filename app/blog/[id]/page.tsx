@@ -26,7 +26,6 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      console.log(docSnap.data());
       setArticle(docSnap.data());
       setComments(docSnap.data().comments);
     } else {
@@ -46,10 +45,6 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
     };
 
     try {
-      await updateDoc(docRef, {
-        comments: arrayUnion(commentObj),
-      });
-
       setComments([...comments, commentObj]);
       setComment("");
 
@@ -63,7 +58,12 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
         progress: undefined,
         theme: "dark",
       });
+
+      await updateDoc(docRef, {
+        comments: arrayUnion(commentObj),
+      });
     } catch (e) {
+      console.log(e);
     } finally {
       setIsCommenting(false);
     }
@@ -124,6 +124,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
               isLoading={isCommenting}
               onClick={addCommentToBlog}
               isDisabled={!isSignedIn || !comment}
+              className="w-[140px]"
             >
               Add Comment
             </Button>
