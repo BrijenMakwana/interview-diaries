@@ -24,11 +24,10 @@ import { Button } from "@nextui-org/button";
 import DeveloperPosition from "@/components/developer-position";
 import InterviewDifficulty from "@/components/interview-difficulty";
 import CompanyName from "@/components/company-name";
+import { toast } from "react-toastify";
 
 export default function DashboardPage() {
   const [articles, setArticles] = useState<any[]>([]);
-
-  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const { isSignedIn, user, isLoaded } = useUser();
 
@@ -54,16 +53,23 @@ export default function DashboardPage() {
   };
 
   const deleteArticle = async (id: string) => {
-    setIsDeleting(true);
-
     try {
-      await deleteDoc(doc(db, "interview-experiences", id));
-
       setArticles(articles.filter((article) => article.id !== id));
+
+      toast.success("Post deleted!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+
+      await deleteDoc(doc(db, "interview-experiences", id));
     } catch (e) {
       console.log(e);
-    } finally {
-      setIsDeleting(false);
     }
   };
 
@@ -102,11 +108,7 @@ export default function DashboardPage() {
                   <InterviewDifficulty difficulty={item.difficulty} />
                 </TableCell>
                 <TableCell>
-                  <Button
-                    color="danger"
-                    isLoading={isDeleting}
-                    onClick={() => deleteArticle(item.id)}
-                  >
+                  <Button color="danger" onClick={() => deleteArticle(item.id)}>
                     Delete
                   </Button>
                 </TableCell>

@@ -17,6 +17,7 @@ import { Link } from "@nextui-org/link";
 import confetti from "canvas-confetti";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
+import { toast } from "react-toastify";
 
 export default function Write() {
   const [content, setContent] = useState<string>("");
@@ -59,13 +60,31 @@ export default function Write() {
         interviewExperienceObj
       );
 
-      confetti();
+      confetti({
+        particleCount: 100,
+        startVelocity: 30,
+        spread: 360,
+        origin: {
+          x: Math.random(),
+          y: Math.random() - 0.2,
+        },
+      });
 
-      push(`/blog/${docRef.id}`);
+      push("/blog");
     } catch (e) {
       console.error("Error adding document: ", e);
     } finally {
       setIsLoading(false);
+      toast.success("Post created!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -109,6 +128,7 @@ export default function Write() {
             isRequired
             onChange={(e) => setRounds(parseInt(e.target.value))}
             value={rounds.toLocaleString()}
+            min={1}
           />
 
           <RadioGroup

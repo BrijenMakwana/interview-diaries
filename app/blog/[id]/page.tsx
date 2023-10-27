@@ -12,6 +12,7 @@ import { Button } from "@nextui-org/button";
 import { useUser } from "@clerk/nextjs";
 import UserComment, { IUserComment } from "@/components/user-comment";
 import { nanoid } from "nanoid";
+import { toast } from "react-toastify";
 
 export default function ArticlePage({ params }: { params: { id: string } }) {
   const [article, setArticle] = useState<any>("");
@@ -51,6 +52,17 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
 
       setComments([...comments, commentObj]);
       setComment("");
+
+      toast.success("Comment added!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     } catch (e) {
     } finally {
       setIsCommenting(false);
@@ -93,7 +105,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
         </article>
 
         <section>
-          <div className="flex flex-row items-center justify-between gap-5">
+          <div className="flex flex-row items-center justify-between gap-3">
             <Input
               type="text"
               label="Your Comment"
