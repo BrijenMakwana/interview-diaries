@@ -1,6 +1,14 @@
 "use client";
 
-import { db, collection, getDocs, query, where } from "@/firebase/firebase";
+import {
+  db,
+  collection,
+  getDocs,
+  query,
+  where,
+  deleteDoc,
+  doc,
+} from "@/firebase/firebase";
 import { useEffect, useState } from "react";
 import {
   Table,
@@ -12,9 +20,15 @@ import {
 } from "@nextui-org/table";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
+import { Button } from "@nextui-org/button";
+import DeveloperPosition from "@/components/developer-position";
+import InterviewDifficulty from "@/components/interview-difficulty";
+import CompanyName from "@/components/company-name";
 
 export default function DashboardPage() {
   const [articles, setArticles] = useState<any[]>([]);
+
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const { isSignedIn, user, isLoaded } = useUser();
 
@@ -39,6 +53,20 @@ export default function DashboardPage() {
     setArticles(articlesArray);
   };
 
+  const deleteArticle = async (id: string) => {
+    setIsDeleting(true);
+
+    try {
+      await deleteDoc(doc(db, "interview-experiences", id));
+
+      setArticles(articles.filter((article) => article.id !== id));
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   useEffect(() => {
     getAllYourArticles();
   }, []);
@@ -52,25 +80,35 @@ export default function DashboardPage() {
             <TableColumn>POSITION</TableColumn>
             <TableColumn>OVERVIEW</TableColumn>
             <TableColumn>DIFFICULTY</TableColumn>
+            <TableColumn>ACTION</TableColumn>
           </TableHeader>
-          <TableBody>
+          <TableBody emptyContent={"No articles to display."}>
             {articles.map((item: any, index: number) => (
               <TableRow
                 key={index + 1}
                 onClick={() => push(`/blog/${item.id}`)}
                 className="cursor-pointer hover:bg-gray-700 "
               >
-                <TableCell className="font-bold capitalize">
-                  {item.company}
+                <TableCell>
+                  <CompanyName company={item.company} />
                 </TableCell>
-                <TableCell className="text-amber-600 font-bold capitalize">
-                  {item.position}
+                <TableCell>
+                  <DeveloperPosition position={item.position} />
                 </TableCell>
                 <TableCell>
                   <p>{item.overview}</p>
                 </TableCell>
                 <TableCell className="capitalize text-pink-300	font-semibold">
-                  {item.difficulty}
+                  <InterviewDifficulty difficulty={item.difficulty} />
+                </TableCell>
+                <TableCell>
+                  <Button
+                    color="danger"
+                    isLoading={isDeleting}
+                    onClick={() => deleteArticle(item.id)}
+                  >
+                    Delete
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
