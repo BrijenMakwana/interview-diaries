@@ -9,6 +9,7 @@ import { Button } from "@nextui-org/button";
 import Newsletter from "@/components/newsletter";
 import Image from "next/image";
 import FeaturedInterviews from "@/components/featured-interviews";
+import MeetCreator from "@/components/meet-creator";
 
 export default function Home() {
   return (
@@ -58,14 +59,7 @@ export default function Home() {
 
       <CustomDivider />
 
-      <SectionHeading text="amazing" highlightedText="developers" />
-      <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
-        <FeaturedDev />
-        <FeaturedDev />
-        <FeaturedDev />
-        <FeaturedDev />
-        <FeaturedDev />
-      </section>
+      <MeetCreator />
 
       <CustomDivider />
 
