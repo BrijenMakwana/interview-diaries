@@ -7,6 +7,8 @@ import SectionHeading from "@/components/section-heading";
 import CustomDivider from "@/components/custom-divider";
 import NextLink from "next/link";
 import { Button } from "@nextui-org/button";
+import { Input } from "@nextui-org/input";
+import Newsletter from "@/components/newsletter";
 
 export default function Home() {
   return (
@@ -75,6 +77,10 @@ export default function Home() {
         <SiteStat title="companies" />
         <SiteStat title="developers" />
       </section>
+
+      <CustomDivider />
+
+      <Newsletter />
     </main>
   );
 }

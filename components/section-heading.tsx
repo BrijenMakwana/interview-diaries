@@ -14,6 +14,7 @@ const SectionHeading: FC<ISectionHeading> = (props) => {
       className={title()}
       style={{
         textTransform: "capitalize",
+        textAlign: "center",
       }}
     >
       {text}{" "}
