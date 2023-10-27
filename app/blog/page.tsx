@@ -90,6 +90,8 @@ export default function BlogPage() {
                   <TableColumn>POSITION</TableColumn>
                   <TableColumn>OVERVIEW</TableColumn>
                   <TableColumn>DIFFICULTY</TableColumn>
+                  <TableColumn>AUTHOR</TableColumn>
+
                   <TableColumn>PUBLISHED ON</TableColumn>
                 </TableHeader>
                 <TableBody>
@@ -110,6 +112,10 @@ export default function BlogPage() {
                       </TableCell>
                       <TableCell>
                         <InterviewDifficulty difficulty={item.difficulty} />
+                      </TableCell>
+
+                      <TableCell>
+                        <span className="self-end text-sm">@{item.author}</span>
                       </TableCell>
                       <TableCell>
                         <span className="text-small capitalize text-default-400">
