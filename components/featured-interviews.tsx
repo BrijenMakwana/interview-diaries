@@ -1,6 +1,8 @@
 import SectionHeading from "./section-heading";
 import { db, collection, getDocs } from "@/firebase/firebase";
 import InterviewCard from "./interview-card";
+import { Button } from "@nextui-org/button";
+import Link from "next/link";
 
 const getAllArticles = async () => {
   const articlesArray: any[] = [];
@@ -21,11 +23,15 @@ export default async function FeaturedInterviews() {
   return (
     <>
       <SectionHeading text="featured" highlightedText="interviews" />
-      <section className="flex gap-5 flex-wrap justify-evenly w-full">
+      <section className="flex gap-5 flex-wrap justify-center w-full">
         {articles.map((item) => (
           <InterviewCard key={item.id} {...item} />
         ))}
       </section>
+
+      <Button color="primary" as={Link} href="/blog">
+        Explore Our Blog
+      </Button>
     </>
   );
 }

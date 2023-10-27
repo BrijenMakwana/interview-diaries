@@ -48,7 +48,7 @@ export default function Home() {
       <CustomDivider />
 
       <SectionHeading text="top" highlightedText="companies" />
-      <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
+      <section className="flex gap-5 flex-wrap items-center justify-center w-full">
         <CompanyCard />
         <CompanyCard />
         <CompanyCard />
