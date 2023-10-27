@@ -165,6 +165,17 @@ export default function Write() {
             onClick={addBlogToFirestore}
             fullWidth
             isLoading={isLoading}
+            isDisabled={
+              !company ||
+              !position ||
+              rounds === 0 ||
+              selected === null ||
+              !mode ||
+              !difficulty ||
+              !interviewDate ||
+              !overview ||
+              !content
+            }
           >
             Publish
           </Button>
