@@ -14,6 +14,10 @@ import {
   TableCell,
 } from "@nextui-org/table";
 import { useRouter } from "next/navigation";
+import moment from "moment";
+import InterviewDifficulty from "@/components/interview-difficulty";
+import DeveloperPosition from "@/components/developer-position";
+import CompanyName from "@/components/company-name";
 
 export default function BlogPage() {
   const [articles, setArticles] = useState<any[]>([]);
@@ -86,6 +90,7 @@ export default function BlogPage() {
                   <TableColumn>POSITION</TableColumn>
                   <TableColumn>OVERVIEW</TableColumn>
                   <TableColumn>DIFFICULTY</TableColumn>
+                  <TableColumn>PUBLISHED ON</TableColumn>
                 </TableHeader>
                 <TableBody>
                   {renderedArray.map((item: any, index: number) => (
@@ -94,17 +99,22 @@ export default function BlogPage() {
                       onClick={() => push(`/blog/${item.id}`)}
                       className="cursor-pointer hover:bg-gray-700 "
                     >
-                      <TableCell className="font-bold capitalize">
-                        {item.company}
+                      <TableCell>
+                        <CompanyName company={item.company} />
                       </TableCell>
-                      <TableCell className="text-amber-600 font-bold capitalize">
-                        {item.position}
+                      <TableCell>
+                        <DeveloperPosition position={item.position} />
                       </TableCell>
                       <TableCell>
                         <p>{item.overview}</p>
                       </TableCell>
-                      <TableCell className="capitalize text-pink-300	font-semibold">
-                        {item.difficulty}
+                      <TableCell>
+                        <InterviewDifficulty difficulty={item.difficulty} />
+                      </TableCell>
+                      <TableCell>
+                        <span className="text-small capitalize text-default-400">
+                          {moment(item.publishedDate).format("ll")}
+                        </span>
                       </TableCell>
                     </TableRow>
                   ))}
