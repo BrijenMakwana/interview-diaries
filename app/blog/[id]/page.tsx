@@ -108,17 +108,14 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
               disabled={!isSignedIn}
             />
 
-            {isSignedIn ? (
-              <Button
-                color="primary"
-                isLoading={isCommenting}
-                onClick={addCommentToBlog}
-              >
-                Add Comment
-              </Button>
-            ) : (
-              <CustomSignInButton />
-            )}
+            <Button
+              color="primary"
+              isLoading={isCommenting}
+              onClick={addCommentToBlog}
+              isDisabled={!isSignedIn || !comment}
+            >
+              Add Comment
+            </Button>
           </div>
 
           <section className="mt-5">
