@@ -10,7 +10,6 @@ import CustomMarkdown from "@/components/custom-markdown";
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { useUser } from "@clerk/nextjs";
-import CustomSignInButton from "@/components/custom-signIn-button";
 import UserComment, { IUserComment } from "@/components/user-comment";
 import { nanoid } from "nanoid";
 

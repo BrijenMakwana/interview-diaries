@@ -5,7 +5,8 @@ import FeaturedDev from "@/components/featured-dev";
 import SiteStat from "@/components/site-stat";
 import SectionHeading from "@/components/section-heading";
 import CustomDivider from "@/components/custom-divider";
-import CustomSignInButton from "@/components/custom-signIn-button";
+import NextLink from "next/link";
+import { Button } from "@nextui-org/button";
 
 export default function Home() {
   return (
@@ -29,7 +30,9 @@ export default function Home() {
         </h2>
       </div>
 
-      <CustomSignInButton />
+      <Button color="primary" as={NextLink} href="/write">
+        Start Writing
+      </Button>
 
       <SectionHeading text="featured" highlightedText="interviews" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">

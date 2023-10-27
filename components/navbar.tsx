@@ -8,9 +8,7 @@ import {
   NavbarMenuItem,
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
 import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
 
 import { link as linkStyles } from "@nextui-org/theme";
 
@@ -24,7 +22,12 @@ import { GithubIcon, SearchIcon } from "@/components/icons";
 import { Logo } from "@/components/icons";
 import { UserButton } from "@clerk/nextjs";
 
-export const Navbar = () => {
+import { currentUser } from "@clerk/nextjs";
+import CustomSignInButton from "./custom-signIn-button";
+
+export async function Navbar() {
+  const user = await currentUser();
+
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -57,6 +60,13 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
+          {user ? (
+            <Button color="primary" as={NextLink} href="/dashboard">
+              Dashboard
+            </Button>
+          ) : (
+            <CustomSignInButton />
+          )}
           <ThemeSwitch />
 
           <Button
@@ -85,17 +95,7 @@ export const Navbar = () => {
         <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                    ? "danger"
-                    : "foreground"
-                }
-                href="#"
-                size="lg"
-              >
+              <Link href={item.href} size="lg" color="foreground">
                 {item.label}
               </Link>
             </NavbarMenuItem>
@@ -104,4 +104,4 @@ export const Navbar = () => {
       </NavbarMenu>
     </NextUINavbar>
   );
-};
+}
