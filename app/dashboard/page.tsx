@@ -38,7 +38,7 @@ export default function DashboardPage() {
 
     const q = query(
       collection(db, "interview-experiences"),
-      where("email", "==", user?.emailAddresses[0].emailAddress)
+      where("email", "==", user?.emailAddresses[0].emailAddress || "")
     );
 
     const querySnapshot = await getDocs(q);
