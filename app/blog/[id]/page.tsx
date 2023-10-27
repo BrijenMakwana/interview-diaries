@@ -69,7 +69,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
         highlightedText={article.company}
       />
 
-      <section className="flex flex-row gap-3 items-start justify-center mt-10 flex-wrap">
+      <section className="flex flex-row gap-3 items-start justify-center flex-wrap mt-10">
         <InterviewCard
           {...article}
           isRoute={false}
@@ -77,7 +77,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
           isPressable={false}
         />
 
-        <article className="p-5 max-w-[700px]">
+        <article className="max-w-[700px] flex-1 p-5 border-solid border-1 border-zinc-700 rounded-xl">
           <section className="flex flex-row gap-2 items-center flex-wrap mb-3">
             <Chip color="primary" variant="flat" className="capitalize">
               {article.selected ? "selected" : "not-selected"}
@@ -91,42 +91,42 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
           </section>
 
           <CustomMarkdown content={article.content} />
-
-          <section className="mt-10 ">
-            <div className="flex flex-row items-center justify-between gap-5">
-              <Input
-                type="text"
-                label="Your Comment"
-                placeholder={
-                  isSignedIn ? "Want to say anything?" : "Login to comment"
-                }
-                onChange={(e) => setComment(e.target.value)}
-                value={comment}
-                maxLength={150}
-                className="flex-1"
-                disabled={!isSignedIn}
-              />
-
-              {isSignedIn ? (
-                <Button
-                  color="primary"
-                  isLoading={isCommenting}
-                  onClick={addCommentToBlog}
-                >
-                  Add Comment
-                </Button>
-              ) : (
-                <CustomSignInButton />
-              )}
-            </div>
-
-            <section className="mt-5">
-              {comments?.map((item: IUserComment) => (
-                <UserComment {...item} key={item.id} />
-              ))}
-            </section>
-          </section>
         </article>
+
+        <section>
+          <div className="flex flex-row items-center justify-between gap-5">
+            <Input
+              type="text"
+              label="Your Comment"
+              placeholder={
+                isSignedIn ? "Want to say anything?" : "Login to comment"
+              }
+              onChange={(e) => setComment(e.target.value)}
+              value={comment}
+              maxLength={150}
+              className="flex-1"
+              disabled={!isSignedIn}
+            />
+
+            {isSignedIn ? (
+              <Button
+                color="primary"
+                isLoading={isCommenting}
+                onClick={addCommentToBlog}
+              >
+                Add Comment
+              </Button>
+            ) : (
+              <CustomSignInButton />
+            )}
+          </div>
+
+          <section className="mt-5">
+            {comments?.map((item: IUserComment) => (
+              <UserComment {...item} key={item.id} />
+            ))}
+          </section>
+        </section>
       </section>
     </section>
   );
