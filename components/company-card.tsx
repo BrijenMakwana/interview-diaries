@@ -4,7 +4,7 @@ import { Divider } from "@nextui-org/divider";
 
 const CompanyCard = () => {
   return (
-    <Card className="max-w-[340px]" isHoverable isPressable>
+    <Card className="max-w-[340px]">
       <CardHeader>
         <p className="text-xl">Microsoft</p>
       </CardHeader>

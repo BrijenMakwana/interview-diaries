@@ -12,6 +12,12 @@ import { useState } from "react";
 
 import { db, addDoc, collection } from "@/firebase/firebase";
 import CustomMarkdown from "@/components/custom-markdown";
+import { Link } from "@nextui-org/link";
+
+import confetti from "canvas-confetti";
+import { useRouter } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
+import { toast } from "react-toastify";
 
 export default function Write() {
   const [content, setContent] = useState<string>("");
@@ -19,12 +25,16 @@ export default function Write() {
 
   const [company, setCompany] = useState<string>("");
   const [position, setPosition] = useState<string>("");
-  const [rounds, setRounds] = useState<number>(0);
+  const [rounds, setRounds] = useState<number>(1);
   const [selected, setSelected] = useState<boolean>(true);
   const [mode, setMode] = useState<string>("off-campus");
   const [difficulty, setDifficulty] = useState<string>("intermediate");
-  const [interviewDate, setInterviewDate] = useState<string>("");
+  const [interviewDate, setInterviewDate] = useState<string>("2023-08-09");
   const [overview, setOverview] = useState<string>("");
+
+  const { isSignedIn, user, isLoaded } = useUser();
+
+  const { push } = useRouter();
 
   const addBlogToFirestore = async () => {
     setIsLoading(true);
@@ -39,7 +49,10 @@ export default function Write() {
       interviewDate,
       overview,
       content,
-      publishedDate: new Date(),
+      publishedDate: new Date().toISOString(),
+      author: user?.fullName,
+      email: user?.emailAddresses[0].emailAddress,
+      comments: [],
     };
 
     try {
@@ -47,11 +60,32 @@ export default function Write() {
         collection(db, "interview-experiences"),
         interviewExperienceObj
       );
-      console.log("Document written with ID: ", docRef.id);
+
+      confetti({
+        particleCount: 100,
+        startVelocity: 30,
+        spread: 360,
+        origin: {
+          x: Math.random(),
+          y: Math.random() - 0.2,
+        },
+      });
+
+      push(`/blog/${docRef.id}`);
     } catch (e) {
       console.error("Error adding document: ", e);
     } finally {
       setIsLoading(false);
+      toast.success("Post created!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     }
   };
 
@@ -76,7 +110,7 @@ export default function Write() {
           <Input
             type="text"
             label="Company"
-            placeholder="Company you interviiewed for"
+            placeholder="Company you interviewed for"
             isRequired
             onChange={(e) => setCompany(e.target.value)}
             value={company}
@@ -95,6 +129,7 @@ export default function Write() {
             isRequired
             onChange={(e) => setRounds(parseInt(e.target.value))}
             value={rounds.toLocaleString()}
+            min={1}
           />
 
           <RadioGroup
@@ -164,6 +199,17 @@ export default function Write() {
             onClick={addBlogToFirestore}
             fullWidth
             isLoading={isLoading}
+            isDisabled={
+              !company ||
+              !position ||
+              rounds === 0 ||
+              selected === null ||
+              !mode ||
+              !difficulty ||
+              !interviewDate ||
+              !overview ||
+              !content
+            }
           >
             Publish
           </Button>
@@ -172,7 +218,7 @@ export default function Write() {
 
       <section className="max-w-[700px] w-full">
         <Tabs aria-label="Options" color="warning">
-          <Tab key="code" title="Code">
+          <Tab key="markdown" title="Markdown">
             <Textarea
               label="Interview Experience"
               placeholder="Start typeing..."
@@ -186,6 +232,14 @@ export default function Write() {
             <CustomMarkdown content={content} />
           </Tab>
         </Tabs>
+
+        <Link
+          isExternal
+          showAnchorIcon
+          href="https://www.markdownguide.org/cheat-sheet/"
+        >
+          Markdown Cheetsheet
+        </Link>
       </section>
     </section>
   );

@@ -8,9 +8,7 @@ import {
   NavbarMenuItem,
 } from "@nextui-org/navbar";
 import { Button } from "@nextui-org/button";
-import { Kbd } from "@nextui-org/kbd";
 import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
 
 import { link as linkStyles } from "@nextui-org/theme";
 
@@ -19,19 +17,23 @@ import NextLink from "next/link";
 import clsx from "clsx";
 
 import { ThemeSwitch } from "@/components/theme-switch";
-import { GithubIcon, SearchIcon } from "@/components/icons";
+import { GithubIcon } from "@/components/icons";
 
-import { Logo } from "@/components/icons";
 import { UserButton } from "@clerk/nextjs";
 
-export const Navbar = () => {
+import { currentUser } from "@clerk/nextjs";
+import CustomSignInButton from "./custom-signIn-button";
+import Image from "next/image";
+
+export async function Navbar() {
+  const user = await currentUser();
+
   return (
     <NextUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
-            <Logo />
-            <p className="font-bold text-inherit">ACME</p>
+          <NextLink href="/">
+            <Image src="/logo.png" height={85} width={85} alt="logo" />
           </NextLink>
         </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
@@ -57,6 +59,13 @@ export const Navbar = () => {
         justify="end"
       >
         <NavbarItem className="hidden sm:flex gap-2">
+          {user ? (
+            <Button color="primary" as={NextLink} href="/dashboard">
+              Dashboard
+            </Button>
+          ) : (
+            <CustomSignInButton />
+          )}
           <ThemeSwitch />
 
           <Button
@@ -83,19 +92,11 @@ export const Navbar = () => {
 
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
+          <UserButton afterSignOutUrl="/" />
+
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                    ? "danger"
-                    : "foreground"
-                }
-                href="#"
-                size="lg"
-              >
+              <Link href={item.href} size="lg" color="foreground">
                 {item.label}
               </Link>
             </NavbarMenuItem>
@@ -104,4 +105,4 @@ export const Navbar = () => {
       </NavbarMenu>
     </NextUINavbar>
   );
-};
+}

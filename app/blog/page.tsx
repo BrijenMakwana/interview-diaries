@@ -14,6 +14,10 @@ import {
   TableCell,
 } from "@nextui-org/table";
 import { useRouter } from "next/navigation";
+import moment from "moment";
+import InterviewDifficulty from "@/components/interview-difficulty";
+import DeveloperPosition from "@/components/developer-position";
+import CompanyName from "@/components/company-name";
 
 export default function BlogPage() {
   const [articles, setArticles] = useState<any[]>([]);
@@ -68,7 +72,7 @@ export default function BlogPage() {
       <div className="w-full flex flex-col items-center mt-12">
         <Tabs aria-label="Options" color="warning">
           <Tab key="card" title="Card View">
-            <section className="flex gap-5 flex-wrap items-center justify-center w-full mt-6">
+            <section className="flex gap-5 flex-wrap justify-center w-full mt-6">
               {searchInput
                 ? filteredBlogs.map((item: any) => (
                     <InterviewCard key={item.id} {...item} />
@@ -86,6 +90,9 @@ export default function BlogPage() {
                   <TableColumn>POSITION</TableColumn>
                   <TableColumn>OVERVIEW</TableColumn>
                   <TableColumn>DIFFICULTY</TableColumn>
+                  <TableColumn>AUTHOR</TableColumn>
+
+                  <TableColumn>PUBLISHED ON</TableColumn>
                 </TableHeader>
                 <TableBody>
                   {renderedArray.map((item: any, index: number) => (
@@ -94,17 +101,26 @@ export default function BlogPage() {
                       onClick={() => push(`/blog/${item.id}`)}
                       className="cursor-pointer hover:bg-gray-700 "
                     >
-                      <TableCell className="font-bold capitalize">
-                        {item.company}
+                      <TableCell>
+                        <CompanyName company={item.company} />
                       </TableCell>
-                      <TableCell className="text-amber-600 font-bold capitalize">
-                        {item.position}
+                      <TableCell>
+                        <DeveloperPosition position={item.position} />
                       </TableCell>
                       <TableCell>
                         <p>{item.overview}</p>
                       </TableCell>
-                      <TableCell className="capitalize text-pink-300	font-semibold">
-                        {item.difficulty}
+                      <TableCell>
+                        <InterviewDifficulty difficulty={item.difficulty} />
+                      </TableCell>
+
+                      <TableCell>
+                        <span className="self-end text-sm">@{item.author}</span>
+                      </TableCell>
+                      <TableCell>
+                        <span className="text-small capitalize text-default-400">
+                          {moment(item.publishedDate).format("ll")}
+                        </span>
                       </TableCell>
                     </TableRow>
                   ))}
