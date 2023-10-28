@@ -17,7 +17,7 @@ const UserComment: FC<IUserComment> = (props) => {
       <CardBody>
         <p>{comment}</p>
 
-        <span className="self-end text-sm">@{author}</span>
+        <span className="self-end text-sm mt-2">@{author}</span>
         <span className="self-end text-xs mt-1">
           {moment(date).format("ll")}
         </span>
