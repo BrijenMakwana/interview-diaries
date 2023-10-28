@@ -82,7 +82,7 @@ export default function BlogPage() {
                   ))}
             </section>
           </Tab>
-          <Tab key="table" title="Table View">
+          <Tab key="table" title="Table View" className="hidden md:block">
             <section className="w-full mt-6">
               <Table aria-label="interview experiences">
                 <TableHeader>

@@ -8,10 +8,15 @@ interface ISiteStat {
 
 const SiteStat: FC<ISiteStat> = (props) => {
   const { title } = props;
+
+  const randomNumber = Math.floor(Math.random() * (1500 - 1000 + 1) + 1000);
+
   return (
     <Card className="py-4">
       <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-        <h4 className="font-bold text-large capitalize">1000+ {title}</h4>
+        <h4 className="font-bold text-large capitalize">
+          {randomNumber}+ {title}
+        </h4>
       </CardHeader>
       <CardBody className="overflow-visible py-2">
         <Image

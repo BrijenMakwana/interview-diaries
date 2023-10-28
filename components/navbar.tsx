@@ -36,7 +36,7 @@ export async function Navbar() {
             <Image src="/logo.png" height={85} width={85} alt="logo" />
           </NextLink>
         </NavbarBrand>
-        <ul className="hidden lg:flex gap-4 justify-start ml-2">
+        <ul className="hidden sm:flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
               <NextLink
