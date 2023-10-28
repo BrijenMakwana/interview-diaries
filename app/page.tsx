@@ -50,16 +50,16 @@ export default function Home() {
 
       <CustomDivider />
 
-      <MeetCreator />
-
-      <CustomDivider />
-
       <SectionHeading text="you can" highlightedText="trust us!" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
         <SiteStat title="interviews" />
         <SiteStat title="companies" />
         <SiteStat title="developers" />
       </section>
+
+      <CustomDivider />
+
+      <MeetCreator />
 
       <CustomDivider />
 

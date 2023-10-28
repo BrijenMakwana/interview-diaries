@@ -1,6 +1,8 @@
 import React from "react";
 import SectionHeading from "./section-heading";
 import CompanyCard from "./company-card";
+import { Button } from "@nextui-org/button";
+import Link from "next/link";
 
 const techCompanies = [
   {
@@ -50,12 +52,16 @@ const techCompanies = [
 const TopCompanies = () => {
   return (
     <>
-      <SectionHeading text="top" highlightedText="companies" />
+      <SectionHeading text="prepare for top" highlightedText="companies" />
       <section className="flex gap-5 flex-wrap justify-center w-full">
         {techCompanies.map((item) => (
           <CompanyCard {...item} key={item.id} />
         ))}
       </section>
+
+      <Button color="primary" as={Link} href="/blog">
+        Explore Our Blog
+      </Button>
     </>
   );
 };
