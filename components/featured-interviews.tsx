@@ -24,7 +24,7 @@ export default async function FeaturedInterviews() {
     <>
       <SectionHeading text="featured" highlightedText="interviews" />
       <section className="flex gap-5 flex-wrap justify-center w-full">
-        {articles.map((item) => (
+        {articles.slice(0, 6).map((item) => (
           <InterviewCard key={item.id} {...item} />
         ))}
       </section>
