@@ -83,7 +83,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
       />
 
       <section className="flex flex-row gap-10 items-start justify-center flex-wrap mt-10 w-full">
-        <article className="max-w-[700px] flex-1">
+        <article className="max-w-[700px] flex-1 md:min-w-[500px]">
           <section className="flex flex-row gap-2 items-center flex-wrap mb-4">
             <Chip
               color={article.selected ? "success" : "danger"}
