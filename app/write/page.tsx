@@ -216,22 +216,27 @@ export default function Write() {
       <section className="max-w-[700px] w-full">
         <Tabs aria-label="Options" color="warning">
           <Tab key="markdown" title="Markdown" className="h-full">
-            {/* <Link
+            <Link
               isExternal
               showAnchorIcon
               href="https://www.markdownguide.org/cheat-sheet/"
+              className="self-end"
             >
               Markdown Cheetsheet
-            </Link> */}
+            </Link>
             <textarea
-              placeholder="Start typeing..."
+              placeholder="Start typeing your article using Markdown..."
               onChange={(e) => setContent(e.target.value)}
               value={content}
               className="w-full h-full p-4 rounded-xl resize-none outline-none"
             />
           </Tab>
           <Tab key="preview" title="Preview">
-            <CustomMarkdown content={content} />
+            {content ? (
+              <CustomMarkdown content={content} />
+            ) : (
+              <p>Nothing to show! Please write something in Markdown</p>
+            )}
           </Tab>
         </Tabs>
       </section>
