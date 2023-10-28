@@ -116,7 +116,7 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
               <Input
                 type="text"
                 placeholder={
-                  isSignedIn ? "Want to say anything?" : "Login to comment"
+                  isSignedIn ? "Want to say something?" : "Login to comment"
                 }
                 onChange={(e) => setComment(e.target.value)}
                 value={comment}
