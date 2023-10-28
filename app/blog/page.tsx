@@ -70,7 +70,7 @@ export default function BlogPage() {
       <SearchBar setValue={setSearchInput} value={searchInput} />
 
       <div className="w-full flex flex-col items-center mt-12">
-        <Tabs aria-label="Options" color="warning">
+        <Tabs aria-label="Options" color="warning" defaultChecked>
           <Tab key="card" title="Card View">
             <section className="flex gap-5 flex-wrap justify-center w-full mt-6">
               {searchInput
