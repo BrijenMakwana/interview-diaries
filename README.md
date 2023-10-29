@@ -1,8 +1,10 @@
-<img src="./public/logo.png" alt="app logo" width="300" height="300"/>
+<img src="./public/logo.png" alt="app logo" width="200" height="200"/>
 
 # Interview Diaries - Where Developers Share Their Interview Stories
 
-[Live Link](https://interview-diaries.vercel.app)
+Use Interview Diaries here on [Live Link](https://interview-diaries.vercel.app)
+
+Watch Demo Video on [loom](https://www.loom.com/share/d89eb529a83246f18262b425056d077f?sid=2f3b0579-14ee-46c4-a542-0c384c828d5f)
 
 ## Table of contents
 
@@ -48,6 +50,7 @@
 ## Built with
 
 - Nextjs 13
+- React
 - NextUI
 - Tailwind CSS
 - Typescript
