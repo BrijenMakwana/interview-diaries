@@ -1,8 +1,15 @@
-<img src="./public/logo.png" alt="app logo" width="300" height="300"/>
+<img src="./public/logo.png" alt="app logo" width="200" height="200"/>
 
 # Interview Diaries - Where Developers Share Their Interview Stories
 
-[Live Link](https://interview-diaries.vercel.app)
+Use Interview Diaries here on [Live Link](https://interview-diaries.vercel.app)
+
+You can create your own account or use this credential to test the app.
+
+> Email: brijenmam@gmail.com
+> Password: Mamjyt12
+
+Watch Demo Video on [loom](https://www.loom.com/share/d89eb529a83246f18262b425056d077f?sid=2f3b0579-14ee-46c4-a542-0c384c828d5f)
 
 ## Table of contents
 
@@ -31,23 +38,24 @@
 
 ## Screenshots
 
-<img src="https://i.imgur.com/tFRQyww.png" alt="screenshot 1"/>
-<img src="https://i.imgur.com/9O8hXq3.png" alt="screenshot 2"/>
-<img src="https://i.imgur.com/vnAk3xh.png" alt="screenshot 3"/>
-<img src="https://i.imgur.com/2C9uJ2d.png" alt="screenshot 4"/>
-<img src="https://i.imgur.com/rYjO84c.png" alt="screenshot 5"/>
-<img src="https://i.imgur.com/zSSlY7R.png" alt="screenshot 6"/>
-<img src="https://i.imgur.com/7EMXMCB.png" alt="screenshot 7"/>
-<img src="https://i.imgur.com/8xk87NM.png" alt="screenshot 8"/>
-<img src="https://i.imgur.com/EdlBgs0.png" alt="screenshot 9"/>
-<img src="https://i.imgur.com/eDurTzb.png" alt="screenshot 10"/>
-<img src="https://i.imgur.com/nUtbXvF.png" alt="screenshot 11"/>
-<img src="https://i.imgur.com/ABpmJV9.png" alt="screenshot 12"/>
+<img src="https://i.imgur.com/0cvCP4p.png" alt="screenshot 1"/>
+<img src="https://i.imgur.com/tEJGIoP.png" alt="screenshot 2"/>
+<img src="https://i.imgur.com/FpJJXx9.png" alt="screenshot 3"/>
+<img src="https://i.imgur.com/TWzHXhG.png" alt="screenshot 4"/>
+<img src="https://i.imgur.com/Thq5cZU.png" alt="screenshot 5"/>
+<img src="https://i.imgur.com/QjoNYrk.png" alt="screenshot 6"/>
+<img src="https://i.imgur.com/yJVOMof.png" alt="screenshot 7"/>
+<img src="https://i.imgur.com/neF3ix8.png" alt="screenshot 8"/>
+<img src="https://i.imgur.com/BxSPfDQ.png" alt="screenshot 9"/>
+<img src="https://i.imgur.com/b1NPhyM.png" alt="screenshot 10"/>
+<img src="https://i.imgur.com/paJG1d4.png" alt="screenshot 11"/>
+<img src="https://i.imgur.com/2xGNOIW.png" alt="screenshot 12"/>
 <img src="https://i.imgur.com/PaS8CgA.png" alt="screenshot 13"/>
 
 ## Built with
 
 - Nextjs 13
+- React
 - NextUI
 - Tailwind CSS
 - Typescript
@@ -58,10 +66,8 @@
 
 ## Challenges Faced
 
-- As a Mobile Developer, I had awareness of Next.js but hadn't previously built a project with it, so I had to adapt to it.
+- As a Mobile Developer I work with with React Native and React. I had awareness of Next.js but hadn't previously built a project with it, so I had to adapt to it.
 - I had previous experience with Tailwind CSS when it was relatively new, but I hadn't used it extensively in a larger project, so I had to spend some time familiarizing myself with it.
-- I initially integrated a third-party rich text editor but discovered it couldn't be used in deployment, so I had to explore alternative options.
-- I invested much time fine-tuning the Markdown to achieve the desired results.
 
 ## Features I would like to implement in the future
 
@@ -69,6 +75,44 @@
 - Incorporate ChatGPT AI to provide authors with suggestions while they are writing.
 - Enable users to express reactions on the articles.
 - Develop a mobile app for it using React Native.
+
+## Run the project
+
+Clone this repo and open in VSCode or any code editor of your choice. Open Terminal and type this command to install all the dependencies.
+
+```
+npm i
+```
+
+Now you need to set environment variables. Create .env file in the root of your project directory.
+
+Now Go to [clerk website](https://clerk.com) and create an account to add authentication in the app.
+Copy this variables from your account and paste it in .env file.
+
+```
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+```
+
+Now go to [firebase website](https://firebase.google.com) and create a project and add a firestore database.
+Copy this variables from your account and paste it in .env file.
+
+```
+NEXT_PUBLIC_API_KEY=
+NEXT_PUBLIC_AUTH_DOMAIN=
+NEXT_PUBLIC_PROJECT_ID=
+NEXT_PUBLIC_STORAGE_BUCKET=
+NEXT_PUBLIC_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_APP_ID=
+```
+
+Now to run the app, run this command.
+
+```
+npm start
+```
+
+Now you can view this app on your browser.
 
 ## Thank You
 
