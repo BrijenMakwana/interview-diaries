@@ -36,7 +36,27 @@ export default function Write() {
 
   const { push } = useRouter();
 
+  const countWords = () => {
+    return content.trim().split(/\s+/).length;
+  };
+
   const addBlogToFirestore = async () => {
+    const totalWords = countWords();
+
+    if (totalWords < 160) {
+      toast.error("Article must be at least 160 words!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
     const interviewExperienceObj = {
@@ -80,7 +100,16 @@ export default function Write() {
 
       push(`/blog/${docRef.id}`);
     } catch (e) {
-      console.error("Error adding document: ", e);
+      toast.error("Something went wrong!", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     } finally {
       setIsLoading(false);
     }
@@ -220,7 +249,6 @@ export default function Write() {
               isExternal
               showAnchorIcon
               href="https://www.markdownguide.org/cheat-sheet/"
-              className="self-end"
             >
               Markdown Cheetsheet
             </Link>
