@@ -18,6 +18,7 @@ Watch Demo Video on [loom](https://www.loom.com/share/d89eb529a83246f18262b42505
 - [Built with](#built-with)
 - [Challenges Faced](#challenges-faced)
 - [Future Enhancements](#features-i-would-like-to-implement-in-the-future)
+- [Run the project](#run-the-project)
 - [Thank you note](#thank-you)
 
 ## Overview
