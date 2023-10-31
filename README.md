@@ -4,12 +4,9 @@
 
 Use Interview Diaries here on [Live Link](https://interview-diaries.vercel.app)
 
-You can create your own account or use this credential to test the app.
-
-> Email: brijenmam@gmail.com
-> Password: Mamjyt12
-
 Watch Demo Video on [loom](https://www.loom.com/share/d89eb529a83246f18262b425056d077f?sid=2f3b0579-14ee-46c4-a542-0c384c828d5f)
+
+> Winner of Webdecoded Hackathon
 
 ## Table of contents
 
