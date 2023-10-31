@@ -96,6 +96,9 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
               {article.mode}
             </Chip>
             <Chip color="primary" variant="dot" className="capitalize">
+              {article.rounds} {article.rounds > 1 ? "rounds" : "round"}
+            </Chip>
+            <Chip color="primary" variant="dot" className="capitalize">
               interviewed on {moment(article.interviewDate).format("ll")}
             </Chip>
           </section>
