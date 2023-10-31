@@ -116,7 +116,7 @@ export default function Write() {
   };
 
   return (
-    <section className="flex flex-row justify-between flex-wrap gap-4">
+    <section className="flex flex-row justify-center flex-wrap gap-4 md:justify-between">
       <Card className="max-w-[400px] h-fit">
         <CardHeader>
           <h1
@@ -256,7 +256,7 @@ export default function Write() {
               placeholder="Start typeing your article using Markdown..."
               onChange={(e) => setContent(e.target.value)}
               value={content}
-              className="w-full h-full p-4 rounded-xl resize-none outline-none"
+              className="w-full p-4 rounded-xl resize-none outline-none h-[720px]"
             />
           </Tab>
           <Tab key="preview" title="Preview">
