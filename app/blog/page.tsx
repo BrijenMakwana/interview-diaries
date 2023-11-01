@@ -45,7 +45,7 @@ export default function BlogPage() {
 
   const filterBlogs = () => {
     const filtered = articles.filter((article: any) =>
-      article.company.toLowerCase().includes(searchInput.toLowerCase())
+      article.company.toLowerCase().includes(searchInput.trim().toLowerCase())
     );
 
     setFilteredBlogs(filtered);

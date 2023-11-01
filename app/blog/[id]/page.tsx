@@ -15,6 +15,7 @@ import { nanoid } from "nanoid";
 import { toast } from "react-toastify";
 import Newsletter from "@/components/newsletter";
 import CustomDivider from "@/components/custom-divider";
+import PlayArticle from "@/components/play-article";
 
 export default function ArticlePage({ params }: { params: { id: string } }) {
   const [article, setArticle] = useState<any>("");
@@ -73,14 +74,20 @@ export default function ArticlePage({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     getArticle();
+
+    return () => {
+      window.speechSynthesis.cancel();
+    };
   }, []);
 
   return (
-    <main className="flex flex-col items-center justify-center w-full">
+    <main className="flex flex-col items-center w-full">
       <SectionHeading
         text="interview experience for"
         highlightedText={article.company}
       />
+
+      <PlayArticle text={article.content} />
 
       <section className="flex flex-row gap-10 items-start justify-center flex-wrap mt-10 w-full">
         <article className="max-w-[700px] flex-1 md:min-w-[500px]">
