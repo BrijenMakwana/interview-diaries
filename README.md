@@ -24,6 +24,7 @@ Watch Demo Video on [loom](https://www.loom.com/share/d89eb529a83246f18262b42505
 - Other developers can read these interview experiences to gain insights and better prepare for their upcoming interviews.
 - The dedicated blog section displays all available articles and includes a search bar, allowing users to easily find articles related to the companies they are interested in.
 - Reading articles does not necessitate user login. Users can freely access articles, each of which includes information about the company name, position, difficulty level, and whether the author was selected for the role or not.
+- You can also play the article. Just hit the play button and listen to it.
 - Additionally, you have the option to leave comments on the articles, which does require you to log in.
 - We also offer a newsletter that you can subscribe to by providing your email address.
 - Writing an interview experience blog does require you to log in.
