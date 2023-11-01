@@ -18,6 +18,7 @@ import confetti from "canvas-confetti";
 import { useRouter } from "next/navigation";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "react-toastify";
+import { countWords } from "@/utils/utils";
 
 export default function Write() {
   const [content, setContent] = useState<string>("");
@@ -36,17 +37,13 @@ export default function Write() {
 
   const { push } = useRouter();
 
-  const countWords = () => {
-    return content.trim().split(/\s+/).length;
-  };
-
   const addBlogToFirestore = async () => {
-    const totalWords = countWords();
+    const totalWords = countWords(content);
 
     if (totalWords < 160) {
       toast.error("Article must be at least 160 words!", {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
