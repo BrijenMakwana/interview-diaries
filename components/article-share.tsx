@@ -28,6 +28,8 @@ const ICON_SIZE = 40;
 const ArticleShare: FC<IArticleShare> = (props) => {
   const { articleUrl } = props;
 
+  const shareableUrl = window.location.origin + articleUrl;
+
   return (
     <Popover placement="top">
       <PopoverTrigger>
@@ -37,27 +39,27 @@ const ArticleShare: FC<IArticleShare> = (props) => {
       </PopoverTrigger>
       <PopoverContent>
         <div className="flex flex-row items-center justify-center px-1 py-2 gap-3">
-          <TwitterShareButton url={articleUrl}>
+          <TwitterShareButton url={shareableUrl}>
             <TwitterIcon round size={ICON_SIZE} />
           </TwitterShareButton>
 
-          <RedditShareButton url={articleUrl}>
+          <RedditShareButton url={shareableUrl}>
             <RedditIcon round size={ICON_SIZE} />
           </RedditShareButton>
 
-          <LinkedinShareButton url={articleUrl}>
+          <LinkedinShareButton url={shareableUrl}>
             <LinkedinIcon round size={ICON_SIZE} />
           </LinkedinShareButton>
 
-          <FacebookShareButton url={articleUrl}>
+          <FacebookShareButton url={shareableUrl}>
             <FacebookIcon round size={ICON_SIZE} />
           </FacebookShareButton>
 
-          <WhatsappShareButton url={articleUrl}>
+          <WhatsappShareButton url={shareableUrl}>
             <WhatsappIcon round size={ICON_SIZE} />
           </WhatsappShareButton>
 
-          <TelegramShareButton url={articleUrl}>
+          <TelegramShareButton url={shareableUrl}>
             <TelegramIcon round size={ICON_SIZE} />
           </TelegramShareButton>
         </div>
