@@ -1,6 +1,8 @@
+"use client";
+
 import { Button } from "@nextui-org/button";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import Waveform from "./waveform";
 
 interface IPlayArticle {
@@ -24,6 +26,10 @@ const PlayArticle: FC<IPlayArticle> = (props) => {
     speechSynthesis.cancel();
     setIsSpeaking(speechSynthesis.speaking);
   };
+
+  useEffect(() => {
+    return () => window.speechSynthesis.cancel();
+  }, []);
 
   return (
     <section className="mt-10">
