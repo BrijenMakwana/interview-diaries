@@ -34,17 +34,15 @@ const PlayArticle: FC<IPlayArticle> = (props) => {
   return (
     <>
       {isSpeaking ? (
-        <div className="flex flex-row gap-3">
-          <Button
-            aria-label="play"
-            color="primary"
-            startContent={<AiFillPauseCircle size={20} />}
-            endContent={<Waveform />}
-            onClick={cancelArticle}
-          >
-            Stop playing
-          </Button>
-        </div>
+        <Button
+          aria-label="play"
+          color="primary"
+          startContent={<AiFillPauseCircle size={20} />}
+          endContent={<Waveform />}
+          onClick={cancelArticle}
+        >
+          Stop playing
+        </Button>
       ) : (
         <Button
           aria-label="play"
