@@ -32,7 +32,7 @@ const PlayArticle: FC<IPlayArticle> = (props) => {
   }, []);
 
   return (
-    <section className="mt-10">
+    <>
       {isSpeaking ? (
         <div className="flex flex-row gap-3">
           <Button
@@ -55,7 +55,7 @@ const PlayArticle: FC<IPlayArticle> = (props) => {
           Play this article
         </Button>
       )}
-    </section>
+    </>
   );
 };
 

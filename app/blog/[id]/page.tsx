@@ -8,6 +8,7 @@ import Newsletter from "@/components/newsletter";
 import CustomDivider from "@/components/custom-divider";
 import PlayArticle from "@/components/play-article";
 import AddComment from "@/components/add-comment";
+import ArticleShare from "@/components/article-share";
 
 const getArticle = async (articleID: string) => {
   const docRef = doc(db, "interview-experiences", articleID);
@@ -32,7 +33,10 @@ export default async function ArticlePage({
         highlightedText={article?.company}
       />
 
-      <PlayArticle text={article?.content} />
+      <div className="flex flex-row items-center justify-center gap-3 mt-10">
+        <PlayArticle text={article?.content} />
+        <ArticleShare articleUrl={`/blog/${params.id}`} />
+      </div>
 
       <section className="flex flex-row gap-10 items-start justify-center flex-wrap mt-10 w-full">
         <article className="max-w-[700px] flex-1 md:min-w-[500px]">
