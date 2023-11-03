@@ -33,7 +33,7 @@ export default async function ArticlePage({
         highlightedText={article?.company}
       />
 
-      <div className="flex flex-row items-center justify-center gap-3 mt-10">
+      <div className="flex flex-row items-center justify-center gap-3 mt-10 flex-wrap">
         <PlayArticle text={article?.content} />
         <ArticleShare articleUrl={`/blog/${params.id}`} />
       </div>
