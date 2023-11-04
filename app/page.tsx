@@ -1,7 +1,6 @@
 import { title, subtitle } from "@/components/primitives";
 import SiteStat from "@/components/site-stat";
 import SectionHeading from "@/components/section-heading";
-import CustomDivider from "@/components/custom-divider";
 import NextLink from "next/link";
 import { Button } from "@nextui-org/button";
 import Newsletter from "@/components/newsletter";
@@ -9,6 +8,7 @@ import Image from "next/image";
 import FeaturedInterviews from "@/components/featured-interviews";
 import MeetCreator from "@/components/meet-creator";
 import TopCompanies from "@/components/top-companies";
+import { Divider } from "@nextui-org/divider";
 
 export default function Home() {
   return (
@@ -40,15 +40,15 @@ export default function Home() {
         </div>
       </section>
 
-      <CustomDivider />
+      <Divider />
 
       <FeaturedInterviews />
 
-      <CustomDivider />
+      <Divider />
 
       <TopCompanies />
 
-      <CustomDivider />
+      <Divider />
 
       <SectionHeading text="you can" highlightedText="trust us!" />
       <section className="flex gap-5 flex-wrap items-center justify-evenly w-full">
@@ -57,11 +57,11 @@ export default function Home() {
         <SiteStat title="developers" />
       </section>
 
-      <CustomDivider />
+      <Divider />
 
       <MeetCreator />
 
-      <CustomDivider />
+      <Divider />
 
       <Newsletter />
     </main>

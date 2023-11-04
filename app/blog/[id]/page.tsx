@@ -5,10 +5,10 @@ import { Chip } from "@nextui-org/chip";
 import moment from "moment";
 import CustomMarkdown from "@/components/custom-markdown";
 import Newsletter from "@/components/newsletter";
-import CustomDivider from "@/components/custom-divider";
 import PlayArticle from "@/components/play-article";
 import AddComment from "@/components/add-comment";
 import ArticleShare from "@/components/article-share";
+import { Divider } from "@nextui-org/divider";
 
 const getArticle = async (articleID: string) => {
   const docRef = doc(db, "interview-experiences", articleID);
@@ -27,18 +27,18 @@ export default async function ArticlePage({
   const article = await getArticle(params.id);
 
   return (
-    <main className="flex flex-col items-center w-full">
+    <main className="flex flex-col items-center w-full gap-10">
       <SectionHeading
         text="interview experience for"
         highlightedText={article?.company}
       />
 
-      <div className="flex flex-row items-center justify-center gap-3 mt-10 flex-wrap">
+      <div className="flex flex-row items-center justify-center gap-3 flex-wrap">
         <PlayArticle text={article?.content} />
         <ArticleShare articleUrl={`/blog/${params.id}`} />
       </div>
 
-      <section className="flex flex-row gap-10 items-start justify-center flex-wrap mt-10 w-full">
+      <section className="flex flex-row gap-10 items-start justify-center flex-wrap w-full">
         <article className="max-w-[700px] flex-1 md:min-w-[500px]">
           <section className="flex flex-row gap-2 items-center flex-wrap mb-4">
             <Chip
@@ -81,7 +81,7 @@ export default async function ArticlePage({
         </div>
       </section>
 
-      <CustomDivider />
+      <Divider />
 
       <Newsletter />
     </main>

@@ -51,7 +51,7 @@ const Newsletter = () => {
   return (
     <>
       <SectionHeading text="subscribe to our" highlightedText="newsletter" />
-      <section className="flex flex-row gap-5 flex-wrap items-center justify-center w-full mt-10">
+      <section className="flex flex-row gap-5 flex-wrap items-center justify-center w-full">
         <Input
           type="email"
           label="Email"
