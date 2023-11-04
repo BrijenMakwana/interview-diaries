@@ -41,16 +41,7 @@ export default function Write() {
     const totalWords = countWords(content);
 
     if (totalWords < 160) {
-      toast.error("Article must be at least 160 words!", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.error("Article must be at least 160 words!");
       return;
     }
 
@@ -78,16 +69,7 @@ export default function Write() {
         interviewExperienceObj
       );
 
-      toast.success("Post created!", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.success("Post created!");
 
       confetti({
         particleCount: 100,
@@ -97,16 +79,7 @@ export default function Write() {
 
       push(`/blog/${docRef.id}`);
     } catch (e) {
-      toast.error("Something went wrong!", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.error("Something went wrong!");
     } finally {
       setIsLoading(false);
     }
