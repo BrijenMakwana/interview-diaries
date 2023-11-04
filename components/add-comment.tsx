@@ -43,16 +43,7 @@ const AddComment: FC<IAddComment> = (props) => {
       setLocalComments([...localComments, commentObj]);
       setComment("");
 
-      toast.success("Comment added!", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.success("Comment added!");
 
       await updateDoc(docRef, {
         comments: arrayUnion(commentObj),

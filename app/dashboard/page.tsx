@@ -56,16 +56,7 @@ export default function DashboardPage() {
     try {
       setArticles(articles.filter((article) => article.id !== id));
 
-      toast.success("Post deleted!", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.success("Post deleted!");
 
       await deleteDoc(doc(db, "interview-experiences", id));
     } catch (e) {

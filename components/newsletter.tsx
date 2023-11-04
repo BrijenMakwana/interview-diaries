@@ -17,16 +17,7 @@ const Newsletter = () => {
 
   const addToNewsletter = () => {
     if (!emailIsValid()) {
-      toast.error("Please enter a valid email address", {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
+      toast.error("Please enter a valid email address");
       return;
     }
     setIsSubscribing(true);
@@ -53,23 +44,14 @@ const Newsletter = () => {
       .finally(() => {
         setEmail("");
         setIsSubscribing(false);
-        toast.success("You have subscribed!", {
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
+        toast.success("You have subscribed!");
       });
   };
 
   return (
     <>
       <SectionHeading text="subscribe to our" highlightedText="newsletter" />
-      <section className="flex flex-row gap-5 flex-wrap items-center justify-center w-full mt-10">
+      <section className="flex flex-row gap-5 flex-wrap items-center justify-center w-full">
         <Input
           type="email"
           label="Email"
