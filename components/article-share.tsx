@@ -18,27 +18,53 @@ import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
 import { Button } from "@nextui-org/button";
 import { FC } from "react";
 import { BsShare } from "react-icons/bs";
+import { HiOutlineLink } from "react-icons/hi";
+import { toast } from "react-toastify";
 
 interface IArticleShare {
   articleUrl: string;
 }
 
-const ICON_SIZE = 40;
+const ICON_SIZE = 38;
 
 const ArticleShare: FC<IArticleShare> = (props) => {
   const { articleUrl } = props;
 
   const shareableUrl = window.location.origin + articleUrl;
 
+  const copyLinkToClipboard = () => {
+    navigator.clipboard.writeText(shareableUrl);
+
+    toast.success("Link copied to clipboard!", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  };
+
   return (
     <Popover placement="top">
       <PopoverTrigger>
-        <Button startContent={<BsShare />} variant="flat">
-          Share
+        <Button variant="flat" isIconOnly>
+          <BsShare />
         </Button>
       </PopoverTrigger>
       <PopoverContent>
-        <div className="flex flex-row items-center justify-center px-1 py-2 gap-3">
+        <div className="flex flex-row items-center justify-center px-1 py-2 gap-3 flex-wrap">
+          <Button
+            variant="flat"
+            isIconOnly
+            className="rounded-full"
+            onClick={copyLinkToClipboard}
+          >
+            <HiOutlineLink size={20} />
+          </Button>
+
           <TwitterShareButton url={shareableUrl}>
             <TwitterIcon round size={ICON_SIZE} />
           </TwitterShareButton>
