@@ -46,14 +46,14 @@ const ArticleShare: FC<IArticleShare> = (props) => {
         </Button>
       </PopoverTrigger>
       <PopoverContent>
-        <div className="flex flex-row items-center justify-center px-1 py-2 gap-3 flex-wrap">
+        <div className="flex flex-row items-center justify-center py-1 gap-3 flex-wrap">
           <Button
             variant="flat"
             isIconOnly
             className="rounded-full"
             onClick={copyLinkToClipboard}
           >
-            <HiOutlineLink size={20} />
+            <HiOutlineLink size={18} />
           </Button>
 
           <TwitterShareButton url={shareableUrl}>
