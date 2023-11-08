@@ -38,8 +38,8 @@ export default async function ArticlePage({
         <ArticleShare articleUrl={`/blog/${params.id}`} />
       </div>
 
-      <section className="flex flex-row gap-10 items-start justify-center flex-wrap w-full">
-        <article className="max-w-[700px] flex-1 md:min-w-[500px]">
+      <section className="flex flex-row items-start justify-center gap-10 flex-wrap w-full">
+        <article className="max-w-[800px]">
           <section className="flex flex-row gap-2 items-center flex-wrap mb-4">
             <Chip
               color={article?.selected ? "success" : "danger"}
