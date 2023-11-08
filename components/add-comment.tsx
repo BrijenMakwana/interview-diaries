@@ -56,7 +56,7 @@ const AddComment: FC<IAddComment> = (props) => {
   };
 
   return (
-    <section className="mt-10">
+    <section className="mt-8">
       <div className="flex flex-row items-center justify-between gap-3">
         <Input
           type="text"
