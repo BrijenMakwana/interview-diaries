@@ -6,13 +6,10 @@ import { Divider } from "@nextui-org/divider";
 import { RadioGroup, Radio } from "@nextui-org/radio";
 import { Input, Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
-import { Tabs, Tab } from "@nextui-org/tabs";
 
 import { useState } from "react";
 
 import { db, addDoc, collection } from "@/firebase/firebase";
-import CustomMarkdown from "@/components/custom-markdown";
-import { Link } from "@nextui-org/link";
 
 import confetti from "canvas-confetti";
 import { useRouter } from "next/navigation";
@@ -20,8 +17,12 @@ import { useUser } from "@clerk/nextjs";
 import { toast } from "react-toastify";
 import { countWords } from "@/utils/utils";
 
+import dynamic from "next/dynamic";
+
+const Editor = dynamic(() => import("../../components/editor"), { ssr: false });
+
 export default function Write() {
-  const [content, setContent] = useState<string>("");
+  const [article, setArticle] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [company, setCompany] = useState<string>("");
@@ -38,7 +39,7 @@ export default function Write() {
   const { push } = useRouter();
 
   const addBlogToFirestore = async () => {
-    const totalWords = countWords(content);
+    const totalWords = countWords(article);
 
     if (totalWords < 160) {
       toast.error("Article must be at least 160 words!");
@@ -56,7 +57,7 @@ export default function Write() {
       mode,
       interviewDate,
       overview,
-      content,
+      content: article,
       publishedDate: new Date().toISOString(),
       author: user?.fullName,
       email: user?.emailAddresses[0].emailAddress,
@@ -204,7 +205,7 @@ export default function Write() {
               !difficulty ||
               !interviewDate ||
               !overview ||
-              !content
+              !article
             }
           >
             Publish
@@ -213,30 +214,7 @@ export default function Write() {
       </Card>
 
       <section className="max-w-[700px] w-full">
-        <Tabs aria-label="Options" color="warning">
-          <Tab key="markdown" title="Markdown" className="h-full">
-            <Link
-              isExternal
-              showAnchorIcon
-              href="https://www.markdownguide.org/cheat-sheet/"
-            >
-              Markdown Cheetsheet
-            </Link>
-            <textarea
-              placeholder="Start typeing your article using Markdown..."
-              onChange={(e) => setContent(e.target.value)}
-              value={content}
-              className="w-full p-4 rounded-xl resize-none outline-none h-[720px]"
-            />
-          </Tab>
-          <Tab key="preview" title="Preview">
-            {content ? (
-              <CustomMarkdown content={content} />
-            ) : (
-              <p>Nothing to show! Please write something in Markdown</p>
-            )}
-          </Tab>
-        </Tabs>
+        <Editor setArticle={setArticle} />
       </section>
     </section>
   );

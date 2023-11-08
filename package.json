@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@blocknote/core": "^0.9.6",
+    "@blocknote/react": "^0.9.6",
     "@clerk/nextjs": "^4.25.6",
     "@clerk/themes": "^1.7.8",
     "@nextui-org/button": "2.0.18",
