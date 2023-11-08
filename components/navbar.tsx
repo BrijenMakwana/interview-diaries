@@ -93,6 +93,13 @@ export async function Navbar() {
       <NavbarMenu>
         <div className="mx-4 mt-2 flex flex-col gap-2">
           <UserButton afterSignOutUrl="/" />
+          {user ? (
+            <Link href="/dashboard" size="lg" color="foreground">
+              Dashboard
+            </Link>
+          ) : (
+            <CustomSignInButton />
+          )}
 
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
