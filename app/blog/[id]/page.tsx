@@ -9,6 +9,7 @@ import PlayArticle from "@/components/play-article";
 import AddComment from "@/components/add-comment";
 import ArticleShare from "@/components/article-share";
 import { Divider } from "@nextui-org/divider";
+import Article from "@/components/article";
 
 const getArticle = async (articleID: string) => {
   const docRef = doc(db, "interview-experiences", articleID);
@@ -39,28 +40,13 @@ export default async function ArticlePage({
       </div>
 
       <section className="flex flex-row items-start justify-center gap-10 flex-wrap w-full">
-        <article className="max-w-[800px]">
-          <section className="flex flex-row gap-2 items-center flex-wrap mb-4">
-            <Chip
-              color={article?.selected ? "success" : "danger"}
-              variant="dot"
-              className="capitalize"
-            >
-              {article?.selected ? "selected" : "not-selected"}
-            </Chip>
-            <Chip color="primary" variant="dot" className="capitalize">
-              {article?.mode}
-            </Chip>
-            <Chip color="primary" variant="dot" className="capitalize">
-              {article?.rounds} {article?.rounds > 1 ? "rounds" : "round"}
-            </Chip>
-            <Chip color="primary" variant="dot" className="capitalize">
-              interviewed on {moment(article?.interviewDate).format("ll")}
-            </Chip>
-          </section>
-
-          <CustomMarkdown content={article?.content} />
-        </article>
+        <Article
+          selected={article?.selected}
+          mode={article?.mode}
+          rounds={article?.rounds}
+          interviewDate={article?.interviewDate}
+          content={article?.content}
+        />
 
         <div>
           <InterviewCard
