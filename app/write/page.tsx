@@ -6,6 +6,7 @@ import { Divider } from "@nextui-org/divider";
 import { RadioGroup, Radio } from "@nextui-org/radio";
 import { Input, Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
+import { useDisclosure } from "@nextui-org/modal";
 
 import { useState } from "react";
 
@@ -18,6 +19,7 @@ import { toast } from "react-toastify";
 import { countWords } from "@/utils/utils";
 
 import dynamic from "next/dynamic";
+import PreviewArticle from "@/components/preview-article";
 
 const Editor = dynamic(() => import("../../components/editor"), { ssr: false });
 
@@ -34,9 +36,22 @@ export default function Write() {
   const [interviewDate, setInterviewDate] = useState<string>("2023-08-09");
   const [overview, setOverview] = useState<string>("");
 
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const { isSignedIn, user, isLoaded } = useUser();
 
   const { push } = useRouter();
+
+  const previewArticle = () => {
+    const totalWords = countWords(article);
+
+    if (totalWords < 160) {
+      toast.error("Article must be at least 160 words!");
+      return;
+    }
+
+    onOpen();
+  };
 
   const addBlogToFirestore = async () => {
     const totalWords = countWords(article);
@@ -87,135 +102,167 @@ export default function Write() {
   };
 
   return (
-    <section className="flex flex-row justify-center flex-wrap gap-4 md:justify-between">
-      <Card className="max-w-[400px] h-fit">
-        <CardHeader>
-          <h1
-            className={title({ color: "yellow" })}
-            style={{
-              textTransform: "capitalize",
-              fontSize: "1.5rem",
-            }}
-          >
-            interview information
-          </h1>
-        </CardHeader>
+    <>
+      <section className="flex flex-row justify-center flex-wrap gap-4 md:justify-between">
+        <Card className="max-w-[400px] h-fit">
+          <CardHeader>
+            <h1
+              className={title({ color: "yellow" })}
+              style={{
+                textTransform: "capitalize",
+                fontSize: "1.5rem",
+              }}
+            >
+              interview information
+            </h1>
+          </CardHeader>
 
-        <Divider />
+          <Divider />
 
-        <CardBody className="gap-4">
-          <Input
-            type="text"
-            label="Company"
-            placeholder="Company you interviewed for"
-            isRequired
-            onChange={(e) => setCompany(e.target.value)}
-            value={company}
-          />
-          <Input
-            type="text"
-            label="Position"
-            placeholder="e.g. Software Engineer"
-            isRequired
-            onChange={(e) => setPosition(e.target.value)}
-            value={position}
-          />
-          <Input
-            type="number"
-            label="No of Rounds"
-            isRequired
-            onChange={(e) => setRounds(parseInt(e.target.value))}
-            value={rounds.toLocaleString()}
-            min={1}
-          />
+          <CardBody className="gap-4">
+            <Input
+              type="text"
+              label="Company"
+              placeholder="Company you interviewed for"
+              isRequired
+              onChange={(e) => setCompany(e.target.value)}
+              value={company}
+            />
+            <Input
+              type="text"
+              label="Position"
+              placeholder="e.g. Software Engineer"
+              isRequired
+              onChange={(e) => setPosition(e.target.value)}
+              value={position}
+            />
+            <Input
+              type="number"
+              label="No of Rounds"
+              isRequired
+              onChange={(e) => setRounds(parseInt(e.target.value))}
+              value={rounds.toLocaleString()}
+              min={1}
+            />
 
-          <RadioGroup
-            label="Selected?"
-            color="primary"
-            defaultValue="yes"
-            orientation="horizontal"
-            isRequired
-            onChange={(e) => setSelected(e.target.value === "yes")}
-            value={selected ? "yes" : "no"}
-          >
-            <Radio value="yes">Yes</Radio>
-            <Radio value="no">No</Radio>
-          </RadioGroup>
+            <RadioGroup
+              label="Selected?"
+              color="primary"
+              defaultValue="yes"
+              orientation="horizontal"
+              isRequired
+              onChange={(e) => setSelected(e.target.value === "yes")}
+              value={selected ? "yes" : "no"}
+            >
+              <Radio value="yes">Yes</Radio>
+              <Radio value="no">No</Radio>
+            </RadioGroup>
 
-          <RadioGroup
-            label="Mode of the Interview"
-            color="primary"
-            defaultValue="off-campus"
-            orientation="horizontal"
-            isRequired
-            onChange={(e) => setMode(e.target.value)}
-            value={mode}
-          >
-            <Radio value="on-campus">On-Campus</Radio>
-            <Radio value="off-campus">Off-Campus</Radio>
-          </RadioGroup>
+            <RadioGroup
+              label="Mode of the Interview"
+              color="primary"
+              defaultValue="off-campus"
+              orientation="horizontal"
+              isRequired
+              onChange={(e) => setMode(e.target.value)}
+              value={mode}
+            >
+              <Radio value="on-campus">On-Campus</Radio>
+              <Radio value="off-campus">Off-Campus</Radio>
+            </RadioGroup>
 
-          <RadioGroup
-            label="Diffiiculty"
-            color="primary"
-            defaultValue="intermediate"
-            orientation="horizontal"
-            isRequired
-            onChange={(e) => setDifficulty(e.target.value)}
-            value={difficulty}
-          >
-            <Radio value="beginner">Beginner</Radio>
-            <Radio value="intermediate">Intermediate</Radio>
-            <Radio value="advanced">Advanced</Radio>
-            <Radio value="expert">Expert</Radio>
-          </RadioGroup>
+            <RadioGroup
+              label="Diffiiculty"
+              color="primary"
+              defaultValue="intermediate"
+              orientation="horizontal"
+              isRequired
+              onChange={(e) => setDifficulty(e.target.value)}
+              value={difficulty}
+            >
+              <Radio value="beginner">Beginner</Radio>
+              <Radio value="intermediate">Intermediate</Radio>
+              <Radio value="advanced">Advanced</Radio>
+              <Radio value="expert">Expert</Radio>
+            </RadioGroup>
 
-          <Input
-            type="date"
-            label="Date of the Interview"
-            labelPlacement="outside-left"
-            isRequired
-            onChange={(e) => setInterviewDate(e.target.value)}
-            value={interviewDate}
-          />
+            <Input
+              type="date"
+              label="Date of the Interview"
+              labelPlacement="outside-left"
+              isRequired
+              onChange={(e) => setInterviewDate(e.target.value)}
+              value={interviewDate}
+            />
 
-          <Textarea
-            label="Overview"
-            placeholder="e.g. I interviewed for a startup and got a good score"
-            maxLength={280}
-            description="Enter a concise overview of your interview experience in less than 280 characters."
-            isRequired
-            onChange={(e) => setOverview(e.target.value)}
-            value={overview}
-          />
-        </CardBody>
+            <Textarea
+              label="Overview"
+              placeholder="e.g. I interviewed for a startup and got a good score"
+              maxLength={280}
+              description="Enter a concise overview of your interview experience in less than 280 characters."
+              isRequired
+              onChange={(e) => setOverview(e.target.value)}
+              value={overview}
+            />
+          </CardBody>
 
-        <CardFooter>
-          <Button
-            color="primary"
-            onClick={addBlogToFirestore}
-            fullWidth
-            isLoading={isLoading}
-            isDisabled={
-              !company ||
-              !position ||
-              rounds === 0 ||
-              selected === null ||
-              !mode ||
-              !difficulty ||
-              !interviewDate ||
-              !overview ||
-              !article
-            }
-          >
-            Publish
-          </Button>
-        </CardFooter>
-      </Card>
+          <CardFooter className="gap-3">
+            <Button
+              color="primary"
+              onClick={previewArticle}
+              fullWidth
+              variant="bordered"
+              isDisabled={
+                !company ||
+                !position ||
+                rounds === 0 ||
+                selected === null ||
+                !mode ||
+                !difficulty ||
+                !interviewDate ||
+                !overview ||
+                !article
+              }
+            >
+              Preview
+            </Button>
+            <Button
+              color="primary"
+              onClick={addBlogToFirestore}
+              fullWidth
+              isLoading={isLoading}
+              isDisabled={
+                !company ||
+                !position ||
+                rounds === 0 ||
+                selected === null ||
+                !mode ||
+                !difficulty ||
+                !interviewDate ||
+                !overview ||
+                !article
+              }
+            >
+              Publish
+            </Button>
+          </CardFooter>
+        </Card>
 
-      <section className="max-w-[700px] w-full">
-        <Editor setArticle={setArticle} />
+        <section className="max-w-[700px] w-full z-10">
+          <Editor setArticle={setArticle} />
+        </section>
       </section>
-    </section>
+
+      <PreviewArticle
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        company={company}
+        selected={selected}
+        mode={mode}
+        rounds={rounds}
+        interviewDate={interviewDate}
+        content={article}
+      />
+    </>
   );
 }
