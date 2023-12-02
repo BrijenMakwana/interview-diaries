@@ -50,6 +50,7 @@ const SchedulePublishBtn: FC<ISchedulePublishBtn> = (props) => {
             isRequired
             onChange={(e) => setScheduleDate(e.target.value)}
             value={scheduleDate}
+            min={new Date().toISOString().split("T")[0]}
           />
 
           <Button color="primary" onPress={onPress}>
