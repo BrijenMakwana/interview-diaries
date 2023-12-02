@@ -119,7 +119,7 @@ export default function Write() {
       overview,
       isPublic,
       content: article,
-      publishedDate: new Date().toISOString(),
+      publishedDate: isPublic ? new Date().toISOString() : scheduleDate,
       author: user?.fullName,
       email: user?.emailAddresses[0].emailAddress,
       comments: [],
@@ -131,7 +131,7 @@ export default function Write() {
         interviewExperienceObj
       );
 
-      toast.success("Post created!");
+      toast.success(isPublic ? "Post created!" : "Post is Scheduled");
 
       confetti({
         particleCount: 100,
@@ -139,7 +139,12 @@ export default function Write() {
         spread: 360,
       });
 
-      push(`/blog/${docRef.id}`);
+      if (isPublic) {
+        push(`/blog/${docRef.id}`);
+        return;
+      }
+
+      push("/dashboard");
     } catch (e) {
       toast.error("Something went wrong!");
     } finally {
