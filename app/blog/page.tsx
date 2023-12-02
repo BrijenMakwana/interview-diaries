@@ -26,6 +26,17 @@ export default function BlogPage() {
 
   const { push } = useRouter();
 
+  const isArticleReadyToPublish = (scheduleDate: string) => {
+    const scheduleDateTime = new Date(scheduleDate);
+
+    const currentDate = new Date();
+
+    scheduleDateTime.setHours(0, 0, 0, 0);
+    currentDate.setHours(0, 0, 0, 0);
+
+    return scheduleDateTime <= currentDate;
+  };
+
   const getAllArticles = async () => {
     const articlesArray: any[] = [];
 
@@ -39,7 +50,11 @@ export default function BlogPage() {
       });
     });
 
-    setArticles(articlesArray);
+    setArticles(
+      articlesArray.filter(
+        (item) => item.isPublic || isArticleReadyToPublish(item.scheduleDate)
+      )
+    );
 
     setFilteredBlogs(articlesArray);
   };
