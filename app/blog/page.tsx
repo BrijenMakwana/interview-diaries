@@ -28,6 +28,7 @@ export default function BlogPage() {
 
   const getAllArticles = async () => {
     const articlesArray: any[] = [];
+
     const querySnapshot = await getDocs(
       collection(db, "interview-experiences")
     );
@@ -73,11 +74,9 @@ export default function BlogPage() {
         <Tabs aria-label="Options" color="warning" defaultChecked>
           <Tab key="card" title="Card View">
             <section className="flex gap-5 flex-wrap justify-center w-full mt-6">
-              {renderedArray
-                .filter((item: any) => item.isPublic)
-                .map((item: any) => (
-                  <InterviewCard key={item.id} {...item} />
-                ))}
+              {renderedArray.map((item: any) => (
+                <InterviewCard key={item.id} {...item} />
+              ))}
             </section>
           </Tab>
           <Tab key="table" title="Table View" className="hidden md:block">
