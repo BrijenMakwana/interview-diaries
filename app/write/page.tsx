@@ -2,13 +2,15 @@
 
 import { title } from "@/components/primitives";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
+import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
+import { BsThreeDotsVertical } from "react-icons/bs";
 import { Divider } from "@nextui-org/divider";
 import { RadioGroup, Radio } from "@nextui-org/radio";
 import { Input, Textarea } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { useDisclosure } from "@nextui-org/modal";
 
-import { useState } from "react";
+import { FC, useState } from "react";
 
 import { db, addDoc, collection } from "@/firebase/firebase";
 
@@ -22,6 +24,29 @@ import dynamic from "next/dynamic";
 import PreviewArticle from "@/components/preview-article";
 
 const Editor = dynamic(() => import("../../components/editor"), { ssr: false });
+
+interface ISchedulePublishBtn {
+  onPress: () => void;
+}
+
+const SchedulePublishBtn: FC<ISchedulePublishBtn> = (props) => {
+  const { onPress } = props;
+
+  return (
+    <Popover placement="top">
+      <PopoverTrigger>
+        <Button isIconOnly>
+          <BsThreeDotsVertical />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="p-0 m-0">
+        <Button variant="faded" color="primary" onPress={onPress}>
+          Schedule Publish
+        </Button>
+      </PopoverContent>
+    </Popover>
+  );
+};
 
 export default function Write() {
   const [article, setArticle] = useState<string>("");
@@ -53,7 +78,11 @@ export default function Write() {
     onOpen();
   };
 
-  const addBlogToFirestore = async () => {
+  const scheduleArticle = () => {
+    addBlogToFirestore(false);
+  };
+
+  const addBlogToFirestore = async (isPublic: boolean) => {
     const totalWords = countWords(article);
 
     if (totalWords < 160) {
@@ -72,6 +101,7 @@ export default function Write() {
       mode,
       interviewDate,
       overview,
+      isPublic,
       content: article,
       publishedDate: new Date().toISOString(),
       author: user?.fullName,
@@ -206,7 +236,7 @@ export default function Write() {
             />
           </CardBody>
 
-          <CardFooter className="gap-3">
+          <CardFooter className="gap-2">
             <Button
               color="primary"
               onClick={previewArticle}
@@ -226,9 +256,10 @@ export default function Write() {
             >
               Preview
             </Button>
+
             <Button
               color="primary"
-              onClick={addBlogToFirestore}
+              onClick={() => addBlogToFirestore(true)}
               fullWidth
               isLoading={isLoading}
               isDisabled={
@@ -245,6 +276,8 @@ export default function Write() {
             >
               Publish
             </Button>
+
+            <SchedulePublishBtn onPress={scheduleArticle} />
           </CardFooter>
         </Card>
 
