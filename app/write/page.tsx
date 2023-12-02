@@ -7,10 +7,10 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Divider } from "@nextui-org/divider";
 import { RadioGroup, Radio } from "@nextui-org/radio";
 import { Input, Textarea } from "@nextui-org/input";
-import { Button } from "@nextui-org/button";
+import { Button, ButtonGroup } from "@nextui-org/button";
 import { useDisclosure } from "@nextui-org/modal";
 
-import { FC, useState } from "react";
+import { FC, useState, Dispatch, SetStateAction } from "react";
 
 import { db, addDoc, collection } from "@/firebase/firebase";
 
@@ -27,22 +27,36 @@ const Editor = dynamic(() => import("../../components/editor"), { ssr: false });
 
 interface ISchedulePublishBtn {
   onPress: () => void;
+  scheduleDate: string;
+  setScheduleDate: Dispatch<SetStateAction<string>>;
 }
 
 const SchedulePublishBtn: FC<ISchedulePublishBtn> = (props) => {
-  const { onPress } = props;
+  const { onPress, scheduleDate, setScheduleDate } = props;
 
   return (
     <Popover placement="top">
       <PopoverTrigger>
-        <Button isIconOnly>
+        <Button isIconOnly color="primary">
           <BsThreeDotsVertical />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 m-0">
-        <Button variant="faded" color="primary" onPress={onPress}>
-          Schedule Publish
-        </Button>
+        <div className="p-5 flex flex-col items-center justify-center gap-5">
+          <Input
+            type="date"
+            label="Date of Publish"
+            labelPlacement="outside-left"
+            isRequired
+            onChange={(e) => setScheduleDate(e.target.value)}
+            value={scheduleDate}
+            min={new Date().toISOString().split("T")[0]}
+          />
+
+          <Button color="primary" onPress={onPress} variant="light">
+            Schedule Publish
+          </Button>
+        </div>
       </PopoverContent>
     </Popover>
   );
@@ -60,6 +74,7 @@ export default function Write() {
   const [difficulty, setDifficulty] = useState<string>("intermediate");
   const [interviewDate, setInterviewDate] = useState<string>("2023-08-09");
   const [overview, setOverview] = useState<string>("");
+  const [scheduleDate, setScheduleDate] = useState<string>("");
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -100,10 +115,11 @@ export default function Write() {
       selected,
       mode,
       interviewDate,
+      scheduleDate,
       overview,
       isPublic,
       content: article,
-      publishedDate: new Date().toISOString(),
+      publishedDate: isPublic ? new Date().toISOString() : scheduleDate,
       author: user?.fullName,
       email: user?.emailAddresses[0].emailAddress,
       comments: [],
@@ -115,7 +131,7 @@ export default function Write() {
         interviewExperienceObj
       );
 
-      toast.success("Post created!");
+      toast.success(isPublic ? "Post created!" : "Post is Scheduled");
 
       confetti({
         particleCount: 100,
@@ -123,7 +139,12 @@ export default function Write() {
         spread: 360,
       });
 
-      push(`/blog/${docRef.id}`);
+      if (isPublic) {
+        push(`/blog/${docRef.id}`);
+        return;
+      }
+
+      push("/dashboard");
     } catch (e) {
       toast.error("Something went wrong!");
     } finally {
@@ -239,6 +260,7 @@ export default function Write() {
           <CardFooter className="gap-2">
             <Button
               color="primary"
+              className="flex-1"
               onClick={previewArticle}
               fullWidth
               variant="bordered"
@@ -257,11 +279,8 @@ export default function Write() {
               Preview
             </Button>
 
-            <Button
-              color="primary"
-              onClick={() => addBlogToFirestore(true)}
-              fullWidth
-              isLoading={isLoading}
+            <ButtonGroup
+              className="flex-1"
               isDisabled={
                 !company ||
                 !position ||
@@ -274,10 +293,21 @@ export default function Write() {
                 !article
               }
             >
-              Publish
-            </Button>
+              <Button
+                color="primary"
+                onClick={() => addBlogToFirestore(true)}
+                fullWidth
+                isLoading={isLoading}
+              >
+                Publish
+              </Button>
 
-            <SchedulePublishBtn onPress={scheduleArticle} />
+              <SchedulePublishBtn
+                onPress={scheduleArticle}
+                scheduleDate={scheduleDate}
+                setScheduleDate={setScheduleDate}
+              />
+            </ButtonGroup>
           </CardFooter>
         </Card>
 
