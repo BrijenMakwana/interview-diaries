@@ -41,8 +41,8 @@ const SchedulePublishBtn: FC<ISchedulePublishBtn> = (props) => {
           <BsThreeDotsVertical />
         </Button>
       </PopoverTrigger>
-      <PopoverContent>
-        <div className="p-2 flex flex-col items-center justify-center gap-5">
+      <PopoverContent className="p-0 m-0">
+        <div className="p-5 flex flex-col items-center justify-center gap-5">
           <Input
             type="date"
             label="Date of Publish"
@@ -53,7 +53,7 @@ const SchedulePublishBtn: FC<ISchedulePublishBtn> = (props) => {
             min={new Date().toISOString().split("T")[0]}
           />
 
-          <Button color="primary" onPress={onPress}>
+          <Button color="primary" onPress={onPress} variant="light">
             Schedule Publish
           </Button>
         </div>
