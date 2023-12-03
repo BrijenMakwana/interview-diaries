@@ -3,7 +3,8 @@
 import { title } from "@/components/primitives";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { FaCaretDown } from "react-icons/fa";
+
 import { Divider } from "@nextui-org/divider";
 import { RadioGroup, Radio } from "@nextui-org/radio";
 import { Input, Textarea } from "@nextui-org/input";
@@ -34,26 +35,44 @@ interface ISchedulePublishBtn {
 const SchedulePublishBtn: FC<ISchedulePublishBtn> = (props) => {
   const { onPress, scheduleDate, setScheduleDate } = props;
 
+  const minDateToPublish = new Date(
+    new Date().setDate(new Date().getDate() + 1)
+  )
+    .toISOString()
+    .split("T")[0];
+
+  const maxDateToPublish = new Date(
+    new Date(minDateToPublish).setDate(new Date(minDateToPublish).getDate() + 6)
+  )
+    .toISOString()
+    .split("T")[0];
+
   return (
     <Popover placement="top">
       <PopoverTrigger>
         <Button isIconOnly color="primary">
-          <BsThreeDotsVertical />
+          <FaCaretDown />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 m-0">
         <div className="p-5 flex flex-col items-center justify-center gap-5">
           <Input
             type="date"
-            label="Date of Publish"
+            label="Date to Publish"
             labelPlacement="outside-left"
             isRequired
             onChange={(e) => setScheduleDate(e.target.value)}
             value={scheduleDate}
-            min={new Date().toISOString().split("T")[0]}
+            min={minDateToPublish}
+            max={maxDateToPublish}
           />
 
-          <Button color="primary" onPress={onPress} variant="light">
+          <Button
+            color="primary"
+            onPress={onPress}
+            variant="light"
+            isDisabled={!scheduleDate}
+          >
             Schedule Publish
           </Button>
         </div>
