@@ -34,6 +34,18 @@ interface ISchedulePublishBtn {
 const SchedulePublishBtn: FC<ISchedulePublishBtn> = (props) => {
   const { onPress, scheduleDate, setScheduleDate } = props;
 
+  const minDateToPublish = new Date(
+    new Date().setDate(new Date().getDate() + 1)
+  )
+    .toISOString()
+    .split("T")[0];
+
+  const maxDateToPublish = new Date(
+    new Date(minDateToPublish).setDate(new Date(minDateToPublish).getDate() + 6)
+  )
+    .toISOString()
+    .split("T")[0];
+
   return (
     <Popover placement="top">
       <PopoverTrigger>
@@ -45,12 +57,13 @@ const SchedulePublishBtn: FC<ISchedulePublishBtn> = (props) => {
         <div className="p-5 flex flex-col items-center justify-center gap-5">
           <Input
             type="date"
-            label="Date of Publish"
+            label="Date to Publish"
             labelPlacement="outside-left"
             isRequired
             onChange={(e) => setScheduleDate(e.target.value)}
             value={scheduleDate}
-            min={new Date().toISOString().split("T")[0]}
+            min={minDateToPublish}
+            max={maxDateToPublish}
           />
 
           <Button color="primary" onPress={onPress} variant="light">
