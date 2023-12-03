@@ -3,7 +3,8 @@
 import { title } from "@/components/primitives";
 import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 import { Popover, PopoverTrigger, PopoverContent } from "@nextui-org/popover";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import { FaCaretDown } from "react-icons/fa";
+
 import { Divider } from "@nextui-org/divider";
 import { RadioGroup, Radio } from "@nextui-org/radio";
 import { Input, Textarea } from "@nextui-org/input";
@@ -50,7 +51,7 @@ const SchedulePublishBtn: FC<ISchedulePublishBtn> = (props) => {
     <Popover placement="top">
       <PopoverTrigger>
         <Button isIconOnly color="primary">
-          <BsThreeDotsVertical />
+          <FaCaretDown />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="p-0 m-0">
@@ -66,7 +67,12 @@ const SchedulePublishBtn: FC<ISchedulePublishBtn> = (props) => {
             max={maxDateToPublish}
           />
 
-          <Button color="primary" onPress={onPress} variant="light">
+          <Button
+            color="primary"
+            onPress={onPress}
+            variant="light"
+            isDisabled={!scheduleDate}
+          >
             Schedule Publish
           </Button>
         </div>
