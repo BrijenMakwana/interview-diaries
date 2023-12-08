@@ -52,7 +52,7 @@ export default function BlogPage() {
 
     setArticles(
       articlesArray.filter(
-        (item) => item.isPublic || isArticleReadyToPublish(item.scheduleDate)
+        (item) => item.isPublic || isArticleReadyToPublish(item.publishedDate)
       )
     );
 

@@ -134,7 +134,6 @@ export default function Write() {
       selected,
       mode,
       interviewDate,
-      scheduleDate,
       overview,
       isPublic,
       content: article,
