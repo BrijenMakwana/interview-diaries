@@ -108,7 +108,7 @@ NEXT_PUBLIC_APP_ID=
 Now to run the app, run this command.
 
 ```
-npm start
+npm run dev
 ```
 
 Now you can view this app on your browser.
